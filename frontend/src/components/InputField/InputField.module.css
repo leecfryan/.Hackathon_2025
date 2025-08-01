@@ -1,19 +1,20 @@
 .inputField {
-    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
 }
 
 .inputLabel {
-    display: block;
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 14px;
     font-weight: 600;
-    margin-bottom: 8px;
-    line-height: 1.4;
+    color: #374151;
+    font-size: 0.875rem;
+    margin-bottom: 2px;
 }
 
 .required {
-    color: #ff6b6b;
-    margin-left: 4px;
+    color: #ef4444;
+    margin-left: 2px;
 }
 
 .inputContainer {
@@ -24,88 +25,86 @@
 
 .input {
     width: 100%;
-    padding: 16px 20px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 12px 16px;
+    border: 2px solid #e5e7eb;
     border-radius: 12px;
-    color: white;
-    font-size: 16px;
-    font-weight: 500;
+    font-size: 1rem;
+    background: white;
+    color: #374151;
     transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
+    outline: none;
 }
 
 .input::placeholder {
-    color: rgba(255, 255, 255, 0.5);
+    color: #9ca3af;
 }
 
 .input:focus {
-    outline: none;
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.4);
-    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
-.inputContainer.focused .input {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.4);
+.inputContainer.focused {
+    /* Additional focused styles if needed */
 }
 
 .inputContainer.error .input {
-    border-color: #ff6b6b;
-    background: rgba(255, 107, 107, 0.1);
+    border-color: #ef4444;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
 }
 
 .passwordToggle {
     position: absolute;
-    right: 16px;
+    right: 12px;
     background: none;
     border: none;
-    color: rgba(255, 255, 255, 0.6);
     cursor: pointer;
-    font-size: 16px;
     padding: 4px;
+    color: #6b7280;
+    font-size: 1.2rem;
     transition: color 0.3s ease;
 }
 
 .passwordToggle:hover {
-    color: rgba(255, 255, 255, 0.8);
+    color: #374151;
 }
 
 .errorMessage {
-    color: #ff6b6b;
-    font-size: 14px;
+    color: #ef4444;
+    font-size: 0.875rem;
     font-weight: 500;
-    margin-top: 8px;
-    line-height: 1.4;
+    margin-top: 4px;
 }
 
+/* Date input specific styles */
+.input[type="date"] {
+    cursor: pointer;
+}
+
+.input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    background-color: rgba(102, 126, 234, 0.1);
+}
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
     .input {
         padding: 14px 16px;
         font-size: 16px;
+        /* Prevents zoom on iOS */
     }
 
     .inputLabel {
-        font-size: 13px;
-    }
-
-    .passwordToggle {
-        right: 12px;
-        font-size: 14px;
+        font-size: 0.9rem;
     }
 
     .errorMessage {
-        font-size: 13px;
-    }
-}
-
-@media (max-width: 480px) {
-    .input {
-        padding: 12px 14px;
-    }
-
-    .passwordToggle {
-        right: 10px;
+        font-size: 0.8rem;
     }
 }

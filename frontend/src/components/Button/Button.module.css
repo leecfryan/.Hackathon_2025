@@ -1,79 +1,77 @@
 .button {
-    position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-weight: 600;
-    text-decoration: none;
     border: none;
     border-radius: 12px;
+    font-weight: 600;
+    text-decoration: none;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-family: inherit;
+    position: relative;
     overflow: hidden;
-    backdrop-filter: blur(10px);
+    font-family: inherit;
+    outline: none;
 }
 
 .button:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
 }
 
 /* Variants */
 .buttonPrimary {
-    background: rgba(255, 255, 255, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
+    border: 1px solid transparent;
 }
 
 .buttonPrimary:hover:not(:disabled) {
-    background: rgba(255, 255, 255, 0.25);
-    border-color: rgba(255, 255, 255, 0.4);
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
 }
 
 .buttonSecondary {
     background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: rgba(255, 255, 255, 0.9);
+    color: #333;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
 }
 
 .buttonSecondary:hover:not(:disabled) {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.3);
-    color: white;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-.buttonDanger {
-    background: rgba(255, 71, 87, 0.2);
-    border: 1px solid rgba(255, 71, 87, 0.3);
-    color: white;
+.buttonOutline {
+    background: transparent;
+    color: #667eea;
+    border: 2px solid #667eea;
 }
 
-.buttonDanger:hover:not(:disabled) {
-    background: rgba(255, 71, 87, 0.3);
-    border-color: rgba(255, 71, 87, 0.4);
-    transform: translateY(-2px);
+.buttonOutline:hover:not(:disabled) {
+    background: #667eea;
+    color: white;
+    transform: translateY(-1px);
 }
 
 /* Sizes */
 .buttonSmall {
     padding: 8px 16px;
-    font-size: 14px;
+    font-size: 0.875rem;
     min-height: 36px;
 }
 
 .buttonMedium {
     padding: 12px 24px;
-    font-size: 16px;
-    min-height: 48px;
+    font-size: 1rem;
+    min-height: 44px;
 }
 
 .buttonLarge {
     padding: 16px 32px;
-    font-size: 18px;
-    min-height: 56px;
+    font-size: 1.125rem;
+    min-height: 52px;
 }
 
 /* Modifiers */
@@ -85,17 +83,19 @@
     opacity: 0.6;
     cursor: not-allowed;
     transform: none !important;
+    box-shadow: none !important;
 }
 
 .buttonLoading {
     cursor: not-allowed;
 }
 
+/* Loading state */
 .buttonSpinner {
     position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .spinner {
@@ -105,14 +105,6 @@
     border-top: 2px solid white;
     border-radius: 50%;
     animation: spin 1s linear infinite;
-}
-
-.buttonText {
-    transition: opacity 0.3s ease;
-}
-
-.buttonTextHidden {
-    opacity: 0;
 }
 
 @keyframes spin {
@@ -125,52 +117,28 @@
     }
 }
 
-@media (max-width: 768px) {
-    .buttonSmall {
-        padding: 6px 12px;
-        font-size: 13px;
-        min-height: 32px;
-    }
-
-    .buttonMedium {
-        padding: 10px 20px;
-        font-size: 15px;
-        min-height: 44px;
-    }
-
-    .buttonLarge {
-        padding: 14px 28px;
-        font-size: 17px;
-        min-height: 52px;
-    }
-
-    .spinner {
-        width: 18px;
-        height: 18px;
-    }
+.buttonText {
+    transition: opacity 0.3s ease;
 }
 
-@media (max-width: 480px) {
-    .buttonSmall {
-        padding: 6px 10px;
-        font-size: 12px;
-        min-height: 30px;
-    }
+.buttonTextHidden {
+    opacity: 0;
+}
 
-    .buttonMedium {
-        padding: 8px 16px;
-        font-size: 14px;
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .buttonSmall {
+        padding: 10px 18px;
         min-height: 40px;
     }
 
-    .buttonLarge {
-        padding: 12px 24px;
-        font-size: 16px;
+    .buttonMedium {
+        padding: 14px 26px;
         min-height: 48px;
     }
 
-    .spinner {
-        width: 16px;
-        height: 16px;
+    .buttonLarge {
+        padding: 18px 34px;
+        min-height: 56px;
     }
 }

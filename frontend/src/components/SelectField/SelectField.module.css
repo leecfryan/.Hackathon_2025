@@ -1,19 +1,20 @@
 .selectField {
-    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
 }
 
 .selectLabel {
-    display: block;
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 14px;
     font-weight: 600;
-    margin-bottom: 8px;
-    line-height: 1.4;
+    color: #374151;
+    font-size: 0.875rem;
+    margin-bottom: 2px;
 }
 
 .required {
-    color: #ff6b6b;
-    margin-left: 4px;
+    color: #ef4444;
+    margin-left: 2px;
 }
 
 .selectContainer {
@@ -24,82 +25,77 @@
 
 .select {
     width: 100%;
-    padding: 16px 50px 16px 20px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 12px 40px 12px 16px;
+    border: 2px solid #e5e7eb;
     border-radius: 12px;
-    color: white;
-    font-size: 16px;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
-    appearance: none;
+    font-size: 1rem;
+    background: white;
+    color: #374151;
     cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
 }
 
 .select:focus {
-    outline: none;
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.4);
-    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
-}
-
-.select option {
-    background: #2c3e50;
-    color: white;
-    padding: 10px;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
 .selectContainer.error .select {
-    border-color: #ff6b6b;
-    background: rgba(255, 107, 107, 0.1);
+    border-color: #ef4444;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
 }
 
 .selectArrow {
     position: absolute;
-    right: 16px;
-    color: rgba(255, 255, 255, 0.6);
+    right: 12px;
     pointer-events: none;
+    color: #6b7280;
     transition: color 0.3s ease;
 }
 
 .select:focus+.selectArrow {
-    color: rgba(255, 255, 255, 0.8);
+    color: #667eea;
+}
+
+.selectContainer.error .selectArrow {
+    color: #ef4444;
 }
 
 .errorMessage {
-    color: #ff6b6b;
-    font-size: 14px;
+    color: #ef4444;
+    font-size: 0.875rem;
     font-weight: 500;
-    margin-top: 8px;
-    line-height: 1.4;
+    margin-top: 4px;
 }
 
+/* Option styling */
+.select option {
+    padding: 8px;
+    background: white;
+    color: #374151;
+}
+
+.select option:disabled {
+    color: #9ca3af;
+}
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
     .select {
-        padding: 14px 46px 14px 16px;
+        padding: 14px 40px 14px 16px;
         font-size: 16px;
+        /* Prevents zoom on iOS */
     }
 
     .selectLabel {
-        font-size: 13px;
-    }
-
-    .selectArrow {
-        right: 12px;
+        font-size: 0.9rem;
     }
 
     .errorMessage {
-        font-size: 13px;
-    }
-}
-
-@media (max-width: 480px) {
-    .select {
-        padding: 12px 42px 12px 14px;
-    }
-
-    .selectArrow {
-        right: 10px;
+        font-size: 0.8rem;
     }
 }
