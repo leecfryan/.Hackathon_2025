@@ -6,6 +6,7 @@ import pool from "./config/db.js";
 import dotenv from "dotenv";
 
 import userRoutes from "./routes/userRoutes.js";
+import requestRoutes from "./routes/requestRoutes.js"
 
 const app = express();
 const server = http.createServer(app);
@@ -41,3 +42,5 @@ app.get("/test-db", async (req, res) => {
 });
 
 app.use("/users", userRoutes);
+app.use("/routes", requestRoutes);
+

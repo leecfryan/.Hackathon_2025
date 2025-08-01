@@ -5,7 +5,7 @@ const saltRounds = 10;
 
 export async function getUserFromEmail(email) {
     try {
-        const query = `select email, password from users where email = $1`;
+        const query = `select * from users where email = $1`;
         const values = [email];
         const result = await pool.query(query, values);
         return result.rows;

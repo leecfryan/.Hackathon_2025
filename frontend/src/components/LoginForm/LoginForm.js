@@ -50,13 +50,13 @@ const LoginForm = ({ onSuccess }) => {
         const userData = {
           email: formData.email,
           displayName:
-            response.data.user?.displayName ||
-            response.data.user?.firstName +
+            response.data?.displayName ||
+            response.data?.firstName +
               " " +
-              response.data.user?.lastName ||
+              response.data?.lastName ||
             "Student",
-          faculty: response.data.user?.faculty || "",
-          yearOfStudy: response.data.user?.yearOfStudy || "",
+          faculty: response.data?.faculty || "",
+          yearOfStudy: response.data?.yearOfStudy || "",
         };
 
         login(userData);

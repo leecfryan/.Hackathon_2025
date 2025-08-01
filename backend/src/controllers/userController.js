@@ -43,11 +43,15 @@ export async function loginHandler (req,res) {
         }
 
         const userData = await getUserFromEmail(email);
+        console.log(userData)
         const hashedPassword = userData[0].password;
+        const faculty = userData[0].faculty;
+        const displayName = userData[0].display_name;
+        const yearOfStudy = userData[0].year_of_study;
         const bcrypt_compare = util.promisify(bcrypt.compare);
         const result = await bcrypt_compare(password, hashedPassword);
         if(result) {
-            res.json({message: "success"});
+            res.json({message: "success", faculty: faculty, displayName: displayName, yearOfStudy: yearOfStudy});
         } else {
             res.json({message: "password mismatch"});
         }
