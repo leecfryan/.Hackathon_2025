@@ -190,7 +190,7 @@ const EmailVerification = ({
         </div>
       </div>
 
-      {/* Development Debug Panel */}
+      {/* Development Debug Panel
       {process.env.NODE_ENV === "development" && (
         <div className={styles.debugPanel}>
           <h4>🔧 Development Debug</h4>
@@ -206,7 +206,7 @@ const EmailVerification = ({
             Log Debug Info
           </Button>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

@@ -1,0 +1,538 @@
+.heatMapPage {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.mainContent {
+    padding: 100px 24px 40px 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.pageHeader {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.backButton {
+    display: inline-flex;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-size: 16px;
+    margin-bottom: 20px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.backButton:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.pageTitle {
+    color: white;
+    font-size: 42px;
+    font-weight: 700;
+    margin: 0 0 12px 0;
+    line-height: 1.2;
+}
+
+.pageSubtitle {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.heatMapContainer {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.mapSection {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.campusMap {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    /* background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 50%, #90caf9 100%); */
+    background-image: url('../../../public/images/smu-campus-map.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 16px;
+    margin-bottom: 30px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.campusMap::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    z-index: 1;
+}
+
+/* .mapPlaceholder {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: rgba(0, 0, 0, 0.6);
+    z-index: 2;
+}
+
+.mapPlaceholder h4 {
+    margin: 0 0 8px 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.mapPlaceholder p {
+    margin: 0;
+    font-size: 14px;
+    opacity: 0.8;
+} */
+
+.mapTitle {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 8px 16px;
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+}
+
+.locationDot {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    cursor: pointer;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease;
+    border: 3px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.4);
+    z-index: 5;
+}
+
+.locationDot:hover {
+    transform: translate(-50%, -50%) scale(1.4);
+    border-color: white;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+    z-index: 6;
+}
+
+.legend {
+    color: white;
+}
+
+.legend h3 {
+    margin: 0 0 16px 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.legendItems {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.legendItem {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.legendDot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.locationsList {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.locationsList h3 {
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 0 20px 0;
+}
+
+.buildingSection {
+    margin-bottom: 30px;
+}
+
+.buildingSection:last-child {
+    margin-bottom: 0;
+}
+
+.buildingName {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 12px 0;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border-left: 3px solid rgba(255, 255, 255, 0.3);
+}
+
+.locationCard {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.locationCard:hover,
+.locationCard.selected {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.locationHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.locationHeader h5 {
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.crowdBadge {
+    padding: 3px 10px;
+    border-radius: 16px;
+    font-size: 11px;
+    font-weight: 600;
+    color: white;
+}
+
+.locationDescription {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 13px;
+    margin: 0 0 10px 0;
+    line-height: 1.4;
+}
+
+.locationStats {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 11px;
+}
+
+.reportCount {
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+}
+
+.lastUpdated {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.reportButton {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.reportButton:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.reportButton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.locationDetail {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.detailCard {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 500px;
+    width: 100%;
+    color: white;
+}
+
+.detailCard h3 {
+    margin: 0 0 8px 0;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.buildingInfo {
+    margin: 0 0 24px 0;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.detailStats {
+    margin-bottom: 30px;
+}
+
+.statItem {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.statItem:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.statLabel {
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+}
+
+.statValue {
+    font-weight: 600;
+}
+
+.closeDetail {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.closeDetail:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Report Form Styles */
+.reportFormOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1100;
+    padding: 20px;
+}
+
+.reportFormCard {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 500px;
+    width: 100%;
+    color: white;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.reportFormCard h3 {
+    margin: 0 0 16px 0;
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.reportLocationName {
+    margin: 0 0 8px 0;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.reportDescription {
+    margin: 0 0 30px 0;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    line-height: 1.5;
+}
+
+.reportForm {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.reportFormActions {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.reportFormActions button {
+    flex: 1;
+}
+
+@media (max-width: 1024px) {
+    .heatMapContainer {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .locationsList {
+        max-height: none;
+    }
+
+    .campusMap {
+        height: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    .mainContent {
+        padding: 100px 16px 20px 16px;
+    }
+
+    .pageTitle {
+        font-size: 32px;
+    }
+
+    .pageSubtitle {
+        font-size: 16px;
+    }
+
+    .mapSection,
+    .locationsList {
+        padding: 20px;
+    }
+
+    .campusMap {
+        height: 300px;
+    }
+
+    .legendItems {
+        gap: 12px;
+    }
+
+    .detailCard,
+    .reportFormCard {
+        padding: 30px 20px;
+        margin: 20px;
+    }
+
+    .reportFormActions {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .pageTitle {
+        font-size: 28px;
+    }
+
+    .pageSubtitle {
+        font-size: 14px;
+    }
+
+    .mapSection,
+    .locationsList {
+        padding: 16px;
+    }
+
+    .campusMap {
+        height: 250px;
+    }
+
+    .locationCard {
+        padding: 12px;
+    }
+
+    .detailCard,
+    .reportFormCard {
+        padding: 24px 16px;
+    }
+
+    .reportFormCard h3 {
+        font-size: 20px;
+    }
+
+    .reportLocationName {
+        font-size: 14px;
+    }
+}

@@ -1,21 +1,19 @@
 .selectField {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    width: 100%;
+    margin-bottom: 20px;
 }
 
 .selectLabel {
+    display: block;
     color: rgba(255, 255, 255, 0.9);
     font-size: 14px;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    gap: 4px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    line-height: 1.4;
 }
 
 .required {
-    color: #fca5a5;
+    color: #ff6b6b;
+    margin-left: 4px;
 }
 
 .selectContainer {
@@ -26,13 +24,14 @@
 
 .select {
     width: 100%;
-    padding: 14px 40px 14px 16px;
+    padding: 16px 50px 16px 20px;
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 12px;
     color: white;
     font-size: 16px;
-    transition: all 0.2s ease;
+    font-weight: 500;
+    transition: all 0.3s ease;
     backdrop-filter: blur(10px);
     appearance: none;
     cursor: pointer;
@@ -40,20 +39,20 @@
 
 .select:focus {
     outline: none;
-    border-color: rgba(255, 255, 255, 0.4);
     background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.4);
     box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
 }
 
 .select option {
-    background: #2d3748;
+    background: #2c3e50;
     color: white;
-    padding: 8px;
+    padding: 10px;
 }
 
 .selectContainer.error .select {
-    border-color: rgba(239, 68, 68, 0.5);
-    background: rgba(239, 68, 68, 0.1);
+    border-color: #ff6b6b;
+    background: rgba(255, 107, 107, 0.1);
 }
 
 .selectArrow {
@@ -61,7 +60,7 @@
     right: 16px;
     color: rgba(255, 255, 255, 0.6);
     pointer-events: none;
-    transition: color 0.2s ease;
+    transition: color 0.3s ease;
 }
 
 .select:focus+.selectArrow {
@@ -69,14 +68,38 @@
 }
 
 .errorMessage {
-    color: #fca5a5;
-    font-size: 13px;
-    margin-top: 4px;
+    color: #ff6b6b;
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 8px;
+    line-height: 1.4;
 }
 
 @media (max-width: 768px) {
     .select {
+        padding: 14px 46px 14px 16px;
         font-size: 16px;
-        /* Prevents zoom on iOS */
+    }
+
+    .selectLabel {
+        font-size: 13px;
+    }
+
+    .selectArrow {
+        right: 12px;
+    }
+
+    .errorMessage {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .select {
+        padding: 12px 42px 12px 14px;
+    }
+
+    .selectArrow {
+        right: 10px;
     }
 }

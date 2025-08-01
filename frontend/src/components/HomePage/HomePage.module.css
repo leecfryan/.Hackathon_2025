@@ -44,7 +44,7 @@
     padding: 30px;
     text-align: left;
     max-width: 400px;
-    margin: 0 auto;
+    margin: 0 auto 40px auto;
 }
 
 .userDetail {
@@ -61,6 +61,59 @@
 .userDetail strong {
     color: white;
     font-weight: 600;
+}
+
+.quickActions {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.actionButton {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    padding: 20px 24px;
+    text-decoration: none;
+    color: white;
+    transition: all 0.3s ease;
+    min-width: 280px;
+}
+
+.actionButton:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.actionIcon {
+    font-size: 32px;
+    flex-shrink: 0;
+}
+
+.actionContent {
+    text-align: left;
+    flex: 1;
+}
+
+.actionContent h3 {
+    margin: 0 0 4px 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+}
+
+.actionContent p {
+    margin: 0;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.3;
 }
 
 @media (max-width: 768px) {
@@ -82,10 +135,28 @@
 
     .userInfo {
         padding: 24px;
+        margin-bottom: 32px;
     }
 
     .userDetail {
         font-size: 14px;
+    }
+
+    .actionButton {
+        min-width: 100%;
+        padding: 18px 20px;
+    }
+
+    .actionIcon {
+        font-size: 28px;
+    }
+
+    .actionContent h3 {
+        font-size: 16px;
+    }
+
+    .actionContent p {
+        font-size: 13px;
     }
 }
 
@@ -100,5 +171,9 @@
 
     .welcomeSubtitle {
         font-size: 14px;
+    }
+
+    .actionButton {
+        padding: 16px 18px;
     }
 }

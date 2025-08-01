@@ -1,3 +1,4 @@
+import React from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -7,6 +8,7 @@ import {
 import { AuthProvider } from "./contexts/AuthContext";
 import AuthLanding from "./components/AuthLanding/AuthLanding";
 import HomePage from "./components/HomePage/HomePage";
+import HeatMap from "./components/HeatMap/HeatMap";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import "./App.css";
 
@@ -22,6 +24,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <HomePage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/heatmap"
+              element={
+                <ProtectedRoute>
+                  <HeatMap />
                 </ProtectedRoute>
               }
             />

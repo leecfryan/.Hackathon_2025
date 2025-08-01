@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import Header from "../Header/Header";
 import styles from "./HomePage.module.css";
@@ -21,7 +22,7 @@ const HomePage = () => {
       <div className={styles.mainContent}>
         <div className={styles.welcomeSection}>
           <h1 className={styles.welcomeTitle}>
-            Welcome to SMOOFriends, {user?.firstName}!
+            Welcome to SMOOFriends, {user?.displayName}!
           </h1>
           <p className={styles.welcomeSubtitle}>
             You're now connected to the{" "}
@@ -40,6 +41,16 @@ const HomePage = () => {
             <p className={styles.userDetail}>
               <strong>Year:</strong> {user?.yearOfStudy}
             </p>
+          </div>
+
+          <div className={styles.quickActions}>
+            <Link to="/heatmap" className={styles.actionButton}>
+              <div className={styles.actionIcon}>🗺️</div>
+              <div className={styles.actionContent}>
+                <h3>Campus HeatMap</h3>
+                <p>View crowded locations on campus</p>
+              </div>
+            </Link>
           </div>
         </div>
       </div>
