@@ -1,5 +1,4 @@
-import React from "react";
-import LoginPage from "./pages/LoginPage";
+import AuthLanding from "./components/AuthLanding/AuthLanding";
 import "./App.css";
 
 function App() {
@@ -25,7 +24,7 @@ function App() {
   // const loadConversationHistory = async () => {
   //   setIsLoadingMessages(true);
   //   setConnectionError(null);
-    
+
   //   try {
   //     // Step 1: Load from local storage immediately for instant UI
   //     const cachedMessages = ChatStorage.getConversation(currentUser.uid, dummyUser.uid);
@@ -36,19 +35,19 @@ function App() {
 
   //     // Step 2: Fetch latest from server
   //     const serverMessages = await ChatAPI.getConversation(currentUser.uid, dummyUser.uid);
-      
+
   //     // Step 3: Update UI with server data (source of truth)
   //     setMessages(serverMessages);
-      
+
   //     // Step 4: Update local cache with latest server data
   //     ChatStorage.saveConversation(currentUser.uid, dummyUser.uid, serverMessages);
-      
+
   //     console.log(`Loaded ${serverMessages.length} messages from server`);
-      
+
   //   } catch (error) {
   //     console.error('Failed to load messages from server:', error);
   //     setConnectionError('Failed to sync with server');
-      
+
   //     // Fallback to cached messages if server fails
   //     const cachedMessages = ChatStorage.getConversation(currentUser.uid, dummyUser.uid);
   //     if (cachedMessages.length > 0) {
@@ -62,12 +61,12 @@ function App() {
 
   // const setupSocket = () => {
   //   const socket = initializeSocket();
-    
+
   //   socket.on('connect', () => {
   //     setIsConnected(true);
   //     setConnectionError(null);
   //   });
-    
+
   //   socket.on('disconnect', () => {
   //     setIsConnected(false);
   //   });
@@ -138,24 +137,24 @@ function App() {
   //     });
 
   //     // Step 4: Update message status to 'sent'
-  //     setMessages(prev => prev.map(msg => 
-  //       msg.id === newMessage.id 
+  //     setMessages(prev => prev.map(msg =>
+  //       msg.id === newMessage.id
   //         ? { ...savedMessage, status: 'sent' }
   //         : msg
   //     ));
 
   //     // Step 5: Update local storage with server response
   //     ChatStorage.updateMessage(currentUser.uid, uid, newMessage.id, {
-  //       ...savedMessage, 
+  //       ...savedMessage,
   //       status: 'sent'
   //     });
 
   //   } catch (error) {
   //     console.error('Failed to send message to server:', error);
-      
+
   //     // Step 6: Mark message as failed but keep in local storage
-  //     setMessages(prev => prev.map(msg => 
-  //       msg.id === newMessage.id 
+  //     setMessages(prev => prev.map(msg =>
+  //       msg.id === newMessage.id
   //         ? { ...msg, status: 'failed' }
   //         : msg
   //     ));
@@ -173,8 +172,8 @@ function App() {
   // const handleRetryMessage = async (failedMessage) => {
   //   try {
   //     // Update status to sending
-  //     setMessages(prev => prev.map(msg => 
-  //       msg.id === failedMessage.id 
+  //     setMessages(prev => prev.map(msg =>
+  //       msg.id === failedMessage.id
   //         ? { ...msg, status: 'sending' }
   //         : msg
   //     ));
@@ -193,8 +192,8 @@ function App() {
   //     });
 
   //     // Update to sent
-  //     setMessages(prev => prev.map(msg => 
-  //       msg.id === failedMessage.id 
+  //     setMessages(prev => prev.map(msg =>
+  //       msg.id === failedMessage.id
   //         ? { ...savedMessage, status: 'sent' }
   //         : msg
   //     ));
@@ -206,10 +205,10 @@ function App() {
 
   //   } catch (error) {
   //     console.error('Failed to retry message:', error);
-      
+
   //     // Update back to failed
-  //     setMessages(prev => prev.map(msg => 
-  //       msg.id === failedMessage.id 
+  //     setMessages(prev => prev.map(msg =>
+  //       msg.id === failedMessage.id
   //         ? { ...msg, status: 'failed' }
   //         : msg
   //     ));
@@ -218,12 +217,12 @@ function App() {
 
   // const handleRetryFailedMessages = async () => {
   //   const failedMessages = messages.filter(msg => msg.status === 'failed');
-    
+
   //   for (const failedMsg of failedMessages) {
   //     try {
   //       // Update status to sending first
-  //       setMessages(prev => prev.map(msg => 
-  //         msg.id === failedMsg.id 
+  //       setMessages(prev => prev.map(msg =>
+  //         msg.id === failedMsg.id
   //           ? { ...msg, status: 'sending' }
   //           : msg
   //       ));
@@ -242,8 +241,8 @@ function App() {
   //       });
 
   //       // Update status to sent
-  //       setMessages(prev => prev.map(msg => 
-  //         msg.id === failedMsg.id 
+  //       setMessages(prev => prev.map(msg =>
+  //         msg.id === failedMsg.id
   //           ? { ...savedMessage, status: 'sent' }
   //           : msg
   //       ));
@@ -255,10 +254,10 @@ function App() {
 
   //     } catch (error) {
   //       console.error(`Failed to retry message ${failedMsg.id}:`, error);
-        
+
   //       // Update back to failed
-  //       setMessages(prev => prev.map(msg => 
-  //         msg.id === failedMsg.id 
+  //       setMessages(prev => prev.map(msg =>
+  //         msg.id === failedMsg.id
   //           ? { ...msg, status: 'failed' }
   //           : msg
   //       ));
@@ -270,10 +269,10 @@ function App() {
   //   if (window.confirm('Are you sure you want to clear this chat? This cannot be undone.')) {
   //     // Clear UI
   //     setMessages([]);
-      
+
   //     // Clear local storage
   //     ChatStorage.clearConversation(currentUser.uid, dummyUser.uid);
-      
+
   //     // Clear from server (optional - you might want to keep for admin purposes)
   //     try {
   //       await ChatAPI.clearConversation(currentUser.uid, dummyUser.uid);
@@ -306,7 +305,7 @@ function App() {
 
   return (
     <div className="App">
-      <LoginPage />
+      <AuthLanding />
     </div>
   );
 }

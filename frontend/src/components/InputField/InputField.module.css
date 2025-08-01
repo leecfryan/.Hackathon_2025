@@ -1,0 +1,103 @@
+.inputField {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.inputLabel {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.required {
+    color: #fca5a5;
+}
+
+.inputContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input {
+    width: 100%;
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    color: white;
+    font-size: 16px;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(10px);
+}
+
+.input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.input:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+}
+
+.inputContainer.focused {
+    transform: translateY(-1px);
+}
+
+.inputContainer.error .input {
+    border-color: rgba(239, 68, 68, 0.5);
+    background: rgba(239, 68, 68, 0.1);
+}
+
+.passwordToggle {
+    position: absolute;
+    right: 12px;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    transition: color 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.passwordToggle:hover {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.passwordToggle:focus {
+    outline: none;
+    color: white;
+}
+
+.errorMessage {
+    color: #fca5a5;
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+/* Auto-fill styles */
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.1) inset;
+    -webkit-text-fill-color: white;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+@media (max-width: 768px) {
+    .input {
+        font-size: 16px;
+        /* Prevents zoom on iOS */
+    }
+}

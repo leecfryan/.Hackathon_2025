@@ -1,0 +1,122 @@
+.button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    outline: none;
+    overflow: hidden;
+}
+
+.button:focus {
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+}
+
+/* Variants */
+.buttonPrimary {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.buttonPrimary:hover:not(.buttonDisabled):not(.buttonLoading) {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.buttonSecondary {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.buttonSecondary:hover:not(.buttonDisabled):not(.buttonLoading) {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Sizes */
+.buttonSmall {
+    padding: 8px 16px;
+    font-size: 14px;
+    min-height: 36px;
+}
+
+.buttonMedium {
+    padding: 12px 24px;
+    font-size: 16px;
+    min-height: 48px;
+}
+
+.buttonLarge {
+    padding: 16px 32px;
+    font-size: 18px;
+    min-height: 56px;
+}
+
+/* Full width */
+.buttonFullWidth {
+    width: 100%;
+}
+
+/* Loading state */
+.buttonLoading {
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.buttonSpinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top: 2px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.buttonTextHidden {
+    opacity: 0;
+}
+
+.buttonText {
+    opacity: 1;
+    transition: opacity 0.2s ease;
+}
+
+/* Disabled state */
+.buttonDisabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Active state */
+.button:active:not(.buttonDisabled):not(.buttonLoading) {
+    transform: translateY(0);
+}

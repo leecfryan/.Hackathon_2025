@@ -1,0 +1,245 @@
+.authLanding {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.authLanding::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.05)"/><circle cx="20" cy="80" r="0.5" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    pointer-events: none;
+}
+
+.authContainer {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 32px;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+    position: relative;
+    animation: slideUp 0.6s ease-out;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.authHeader {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.logoIcon {
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+.logo h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: white;
+    margin: 0;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.authSubtitle {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 15px;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.formContainer {
+    margin-bottom: 20px;
+}
+
+.formTabs {
+    display: flex;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 4px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.tab {
+    flex: 1;
+    padding: 10px 16px;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.tab.active {
+    color: white;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.tab:hover:not(.active) {
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.formContent {
+    animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.authFooter {
+    text-align: center;
+    margin-top: 16px;
+}
+
+.authFooter p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    margin: 0;
+}
+
+.linkButton {
+    background: none;
+    border: none;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 14px;
+    transition: color 0.2s ease;
+}
+
+.linkButton:hover {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.features {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.feature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    flex: 1;
+    padding: 12px 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.featureIcon {
+    font-size: 20px;
+}
+
+.feature span {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 11px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.universityNotice {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 12px;
+    text-align: center;
+}
+
+.universityNotice p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 12px;
+    margin: 0;
+    line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+    .authContainer {
+        padding: 20px;
+        margin: 10px;
+        max-width: 95%;
+    }
+
+    .logo h1 {
+        font-size: 24px;
+    }
+
+    .features {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .feature {
+        flex-direction: row;
+        justify-content: center;
+        padding: 10px;
+    }
+
+    .feature span {
+        font-size: 12px;
+    }
+}
