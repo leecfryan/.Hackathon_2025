@@ -1,0 +1,82 @@
+.selectField {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.selectLabel {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.required {
+    color: #fca5a5;
+}
+
+.selectContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.select {
+    width: 100%;
+    padding: 14px 40px 14px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    color: white;
+    font-size: 16px;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(10px);
+    appearance: none;
+    cursor: pointer;
+}
+
+.select:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+}
+
+.select option {
+    background: #2d3748;
+    color: white;
+    padding: 8px;
+}
+
+.selectContainer.error .select {
+    border-color: rgba(239, 68, 68, 0.5);
+    background: rgba(239, 68, 68, 0.1);
+}
+
+.selectArrow {
+    position: absolute;
+    right: 16px;
+    color: rgba(255, 255, 255, 0.6);
+    pointer-events: none;
+    transition: color 0.2s ease;
+}
+
+.select:focus+.selectArrow {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.errorMessage {
+    color: #fca5a5;
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+@media (max-width: 768px) {
+    .select {
+        font-size: 16px;
+        /* Prevents zoom on iOS */
+    }
+}
