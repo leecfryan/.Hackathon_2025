@@ -44,7 +44,7 @@ const MeetingForm = ({ isOpen, onClose, onSubmit }) => {
     { value: "SOE", label: "School of Economics" },
     { value: "SOA", label: "School of Accountancy" },
     { value: "LAW", label: "School of Law" },
-    { value: "any", label: "Any Faculty" },
+    { value: "ANY", label: "Any Faculty" },
   ];
 
   const yearOptions = [

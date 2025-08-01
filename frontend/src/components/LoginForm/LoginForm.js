@@ -51,9 +51,7 @@ const LoginForm = ({ onSuccess }) => {
           email: formData.email,
           displayName:
             response.data?.displayName ||
-            response.data?.firstName +
-              " " +
-              response.data?.lastName ||
+            response.data?.firstName + " " + response.data?.lastName ||
             "Student",
           faculty: response.data?.faculty || "",
           yearOfStudy: response.data?.yearOfStudy || "",

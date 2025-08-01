@@ -24,14 +24,12 @@ const RegisterForm = ({ onSuccess }) => {
 
   const facultyOptions = [
     { value: "", label: "Select your faculty" },
-    { value: "arts", label: "Arts & Humanities" },
-    { value: "business", label: "Business & Economics" },
-    { value: "engineering", label: "Engineering & Technology" },
-    { value: "science", label: "Science & Mathematics" },
-    { value: "medicine", label: "Medicine & Health Sciences" },
-    { value: "law", label: "Law" },
-    { value: "education", label: "Education" },
-    { value: "social", label: "Social Sciences" },
+    { value: "SCIS", label: "School of Computing and Information Systems" },
+    { value: "LKCSB", label: "Lee Kong Chian School of Business" },
+    { value: "SOSS", label: "School of Social Sciences" },
+    { value: "SOE", label: "School of Economics" },
+    { value: "SOA", label: "School of Accountancy" },
+    { value: "LAW", label: "School of Law" },
     { value: "other", label: "Other" },
   ];
 

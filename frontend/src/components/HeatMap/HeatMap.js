@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useAuth } from "../../contexts/AuthContext";
+// import { useAuth } from "../../contexts/AuthContext";
 import Header from "../Header/Header";
 import InputField from "../InputField/InputField";
 import SelectField from "../SelectField/SelectField";
@@ -8,7 +8,7 @@ import Button from "../Button/Button";
 import styles from "./HeatMap.module.css";
 
 const HeatMap = () => {
-  const { user } = useAuth();
+  // const { user } = useAuth();
   const [buildings, setBuildings] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [showReportForm, setShowReportForm] = useState(false);

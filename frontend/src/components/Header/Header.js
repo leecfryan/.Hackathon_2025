@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { useAuth } from '../../contexts/AuthContext';
-import styles from './Header.module.css';
+import React, { useState } from "react";
+import { useAuth } from "../../contexts/AuthContext";
+import styles from "./Header.module.css";
 
 const Header = () => {
   const { user, logout } = useAuth();
@@ -12,11 +12,11 @@ const Header = () => {
   };
 
   const extractUniversityFromEmail = (email) => {
-    if (email && email.endsWith('.edu')) {
-      const domain = email.split('@')[1];
-      return domain.replace('.edu', '').replace(/\./g, ' ').toUpperCase();
+    if (email && email.endsWith(".edu")) {
+      const domain = email.split("@")[1];
+      return domain.replace(".edu", "").replace(/\./g, " ").toUpperCase();
     }
-    return '';
+    return "";
   };
 
   return (
@@ -27,6 +27,15 @@ const Header = () => {
           <span className={styles.logoSubtext}>University Social Network</span>
         </div>
 
+        {/* <div className={styles.searchBar}>
+          <input
+            type="text"
+            placeholder="Search students, groups, events..."
+            className={styles.searchInput}
+          />
+          <button className={styles.searchButton}>🔍</button>
+        </div> */}
+
         <div className={styles.userSection}>
           <div className={styles.userInfo}>
             <span className={styles.userName}>
@@ -36,15 +45,16 @@ const Header = () => {
               {extractUniversityFromEmail(user?.email)}
             </span>
           </div>
-          
+
           <div className={styles.userMenu}>
-            <button 
+            <button
               className={styles.userAvatar}
               onClick={() => setShowUserMenu(!showUserMenu)}
             >
-              {user?.firstName?.charAt(0)}{user?.lastName?.charAt(0)}
+              {user?.firstName?.charAt(0)}
+              {user?.lastName?.charAt(0)}
             </button>
-            
+
             {showUserMenu && (
               <div className={styles.userDropdown}>
                 <div className={styles.dropdownItem}>
@@ -57,10 +67,7 @@ const Header = () => {
                   <span>❓ Help</span>
                 </div>
                 <div className={styles.dropdownDivider}></div>
-                <button 
-                  className={styles.dropdownItem}
-                  onClick={handleLogout}
-                >
+                <button className={styles.dropdownItem} onClick={handleLogout}>
                   <span>🚪 Sign Out</span>
                 </button>
               </div>
