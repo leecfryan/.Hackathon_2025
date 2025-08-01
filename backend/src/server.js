@@ -42,5 +42,5 @@ app.get("/test-db", async (req, res) => {
 });
 
 app.use("/users", userRoutes);
-app.use("/routes", requestRoutes);
+app.use("/requests", requestRoutes);
 

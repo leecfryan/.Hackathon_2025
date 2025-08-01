@@ -13,13 +13,13 @@ export async function sendVerificationEmail(userEmail, verificationCode) {
         pass: process.env.MAIL_PASS,
       },
         tls: {
-            rejectUnauthorized: false, // 👈 Accept self-signed certs
+            rejectUnauthorized: false, 
         },
     });
 
     // 2. Send email with custom display name
     const info = await transporter.sendMail({
-      from: `"noreply<MyApp>" <${process.env.MAIL_USER}>`, // 👈 Display name
+      from: `"noreply<MyApp>" <${process.env.MAIL_USER}>`, 
       to: userEmail,
       subject: "Your Verification Code",
       text: `Your verification code is: ${verificationCode}`,

@@ -41,3 +41,15 @@ export async function checkIfEmailExists(email) {
         throw error;
     }
 }
+
+export async function getUserFromId (userId) {
+    try {
+        const query = `select * from users where user_id = $1`;
+        const values = [userId];
+        const result = await pool.query(query, values);
+        return result.rows;
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
