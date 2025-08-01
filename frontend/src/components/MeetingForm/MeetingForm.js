@@ -36,8 +36,8 @@ const MeetingForm = ({ isOpen, onClose, onSubmit }) => {
 
   const genderOptions = [
     { value: "any", label: "No preference" },
-    { value: "male", label: "Male" },
-    { value: "female", label: "Female" },
+    { value: "m", label: "Male" },
+    { value: "f", label: "Female" },
   ];
 
   const facultyOptions = [

@@ -2,12 +2,10 @@ import { checkRequest, submitRequest } from "../services/requestServices.js";
 
 export async function submitRequestHandler(req, res) {
     try {
-
         const {email, activity, genderPreference, facultyPreference, yearPreference, meetingDate, meetingHour} = req.body;
-
         const result = await submitRequest(email, activity, genderPreference, facultyPreference, yearPreference, meetingDate, meetingHour)
-        if(result) {
-            return res.json({message:"success"});
+        if(result.message === "success") {
+            return res.json({message:"success", requestId: result.requestId});
         } else {
             return res.json({message:"failed"});
         }
@@ -19,7 +17,9 @@ export async function submitRequestHandler(req, res) {
 
 export async function checkRequestHandler (req, res) {
     try {
-        
+        const {email, requestId} = req.body;
+        const result = await checkRequest(email, requestId);
+        console.log(result);
     } catch (error) {
         console.error(error);
         throw error;
