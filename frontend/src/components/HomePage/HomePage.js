@@ -29,7 +29,7 @@ const HomePage = () => {
           </p>
           <div className={styles.userInfo}>
             <p className={styles.userDetail}>
-              <strong>Name:</strong> {user?.displayName} {user?.lastName}
+              <strong>Name:</strong> {user?.displayName}
             </p>
             <p className={styles.userDetail}>
               <strong>Email:</strong> {user?.email}

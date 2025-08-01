@@ -21,7 +21,7 @@ export async function registerHandler (req,res) {
     try {
         const {email, password, gender, faculty, yearOfStudy, firstName, lastName} = req.body;
         const display = firstName + " " + lastName;
-        const success = await register(email, password, gender, faculty, yearOfStudy, display);
+        const success = await register(email, password, gender, faculty, yearOfStudy, display, firstName, lastName);
 
         if(success) {
             res.json({message: "success"});
@@ -48,13 +48,15 @@ export async function loginHandler (req,res) {
         const faculty = userData[0].faculty;
         const displayName = userData[0].display_name;
         const yearOfStudy = userData[0].year_of_study;
+        const firstName = userData[0].first_name;
+        const lastName = userData[0].last_name;
         const bcrypt_compare = util.promisify(bcrypt.compare);
         const result = await bcrypt_compare(password, hashedPassword);
         if(result) {
-            res.json({message: "success", faculty: faculty, displayName: displayName, yearOfStudy: yearOfStudy});
+            res.json({message: "success", faculty: faculty, displayName: displayName, yearOfStudy: yearOfStudy, firstName: firstName, lastName: lastName});
         } else {
             res.json({message: "password mismatch"});
-        }
+        } 
     } catch (error) {
         console.error(error);
         res.json({error: error})

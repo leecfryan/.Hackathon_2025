@@ -57,6 +57,8 @@ const LoginForm = ({ onSuccess }) => {
             "Student",
           faculty: response.data?.faculty || "",
           yearOfStudy: response.data?.yearOfStudy || "",
+          firstName: response.data?.firstName || "",
+          lastName: response.data?.lastName || "",
         };
 
         login(userData);
