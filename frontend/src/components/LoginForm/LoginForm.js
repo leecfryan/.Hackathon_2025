@@ -4,6 +4,7 @@ import Button from "../Button/Button";
 import EmailVerification from "../EmailVerification/EmailVerification";
 import mockEmailService from "../../services/mockEmailService";
 import styles from "./LoginForm.module.css";
+import axios from "axios";
 
 const LoginForm = ({ onSuccess }) => {
   const [currentStep, setCurrentStep] = useState("login"); // 'login' or 'verify'
@@ -47,11 +48,19 @@ const LoginForm = ({ onSuccess }) => {
       if (isVerified) {
         // Email is verified, proceed with login
         setIsLoading(false);
-        if (onSuccess) {
-          onSuccess();
-        } else {
-          alert("Login successful! Welcome back to SMOOFriends!");
-        }
+        axios.post("http://localhost:3001/users/login", formData)
+          .then((res) => {
+            if(res.data.message === "success") {
+              if (onSuccess) {
+                onSuccess();
+              } else {
+                alert("Login successful! Welcome back to SMOOFriends!");
+              }
+            } else {
+              alert("Login unsuccessful");
+            }
+          })
+          
       } else {
         // Email not verified, send verification code
         try {

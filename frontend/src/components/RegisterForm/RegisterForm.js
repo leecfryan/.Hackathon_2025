@@ -132,14 +132,17 @@ const RegisterForm = ({ onSuccess }) => {
     // For now, we'll just call the success callback
     axios.post("http://localhost:3001/users/register", formData)
       .then((res) => {
-        console.log(res);
+        if(res.data.message === "success") {
+          if (onSuccess) {
+            onSuccess();
+          } else {
+            alert("Registration completed successfully! Welcome to SMOOFriends!");
+          }
+        } else {
+          alert("Registration failed")
+        }
       })
 
-    if (onSuccess) {
-      onSuccess();
-    } else {
-      alert("Registration completed successfully! Welcome to SMOOFriends!");
-    }
   };
 
   const handleBackToRegistration = () => {

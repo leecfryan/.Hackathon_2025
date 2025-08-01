@@ -3,13 +3,12 @@ import bcrypt from "bcrypt";
 
 const saltRounds = 10;
 
-export async function login(email, password) {
+export async function getUserFromEmail(email) {
     try {
-        const query = ``;
-
-        const values = [];
+        const query = `select email, password from users where email = $1`;
+        const values = [email];
         const result = await pool.query(query, values);
-        return result.rows[0];
+        return result.rows;
     } catch (error) {
         console.error(error);
         throw error;
@@ -33,7 +32,7 @@ export async function register(email, password, gender, faculty, year, display) 
 
 export async function checkIfEmailExists(email) {
     try {
-        const query = `select from users where email = $1`;
+        const query = `select * from users where email = $1`;
         const values = [email];
         const result = await pool.query(query, values);
         return result.rowCount > 0;

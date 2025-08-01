@@ -1,4 +1,6 @@
-import { checkIfEmailExists, register } from "../services/userServices.js";
+import { checkIfEmailExists, getUserFromEmail, register } from "../services/userServices.js";
+import bcrypt from "bcrypt";
+import util from "util";
 
 export async function checkIfEmailExistsHandler (req,res) {
     try {
@@ -11,7 +13,7 @@ export async function checkIfEmailExistsHandler (req,res) {
         }
     } catch (error) {
         console.error(error);
-        res.status(500).json({error:"Server error"});
+        res.json({error:"Server error"});
     }
 }
 
@@ -22,12 +24,35 @@ export async function registerHandler (req,res) {
         const success = await register(email, password, gender, faculty, yearOfStudy, display);
 
         if(success) {
-            res.status(201).json({message: "User created."});
+            res.json({message: "success"});
         } else {
-            res.status(400).json({message: "Failed."});
+            res.json({message: "failed"});
         }
     } catch (error) {
         console.error(error);
-        res.status(500).json({error:"Server error"});
+        res.status(500).json({error: error});
+    }
+}
+
+export async function loginHandler (req,res) {
+    try {
+        const {email, password} = req.body;
+        const emailExists = await checkIfEmailExists(email);
+        if(emailExists.length === 0) {
+            return res.json({message: "Email is not registered, please register."})
+        }
+
+        const userData = await getUserFromEmail(email);
+        const hashedPassword = userData[0].password;
+        const bcrypt_compare = util.promisify(bcrypt.compare);
+        const result = await bcrypt_compare(password, hashedPassword);
+        if(result) {
+            res.json({message: "success"});
+        } else {
+            res.json({message: "password mismatch"});
+        }
+    } catch (error) {
+        console.error(error);
+        res.json({error: error})
     }
 }
