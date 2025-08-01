@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import InputField from "../InputField/InputField";
 import SelectField from "../SelectField/SelectField";
 import Button from "../Button/Button";
@@ -67,9 +67,12 @@ const RegisterForm = ({ onSuccess }) => {
 
   async function checkEmailExists(email) {
     try {
-      const res = await axios.get("http://localhost:3001/users/checkIfEmailExists", {
-        params: { email }
-      });
+      const res = await axios.get(
+        "http://localhost:3001/users/checkIfEmailExists",
+        {
+          params: { email },
+        }
+      );
       return res.data.exists; // true or false
     } catch (err) {
       console.error("Error checking email:", err);
@@ -97,7 +100,7 @@ const RegisterForm = ({ onSuccess }) => {
     }
 
     const exists = await checkEmailExists(formData.email);
-    if(exists) {
+    if (exists) {
       setError("Email is already in use");
       return;
     }
@@ -130,19 +133,17 @@ const RegisterForm = ({ onSuccess }) => {
 
     // Here you would typically save the user data to your backend
     // For now, we'll just call the success callback
-    axios.post("http://localhost:3001/users/register", formData)
-      .then((res) => {
-        if(res.data.message === "success") {
-          if (onSuccess) {
-            onSuccess();
-          } else {
-            alert("Registration completed successfully! Welcome to SMOOFriends!");
-          }
+    axios.post("http://localhost:3001/users/register", formData).then((res) => {
+      if (res.data.message === "success") {
+        if (onSuccess) {
+          onSuccess();
         } else {
-          alert("Registration failed")
+          alert("Registration completed successfully! Welcome to SMOOFriends!");
         }
-      })
-
+      } else {
+        alert("Registration failed");
+      }
+    });
   };
 
   const handleBackToRegistration = () => {

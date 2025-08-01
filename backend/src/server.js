@@ -9,33 +9,35 @@ import userRoutes from "./routes/userRoutes.js";
 
 const app = express();
 const server = http.createServer(app);
-dotenv.config()
+dotenv.config();
 
-app.use(express.json())
-app.use(cors({
+app.use(express.json());
+app.use(
+  cors({
     origin: "http://localhost:3000",
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
-}))
+  })
+);
 
-app.listen(3001)
+app.listen(3001);
 
-const io = new Server (server, {
+const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000", 
+    origin: "http://localhost:3000",
     methods: ["GET", "POST"],
-    credentials: true
+    credentials: true,
   },
-  allowEIO3: true
+  allowEIO3: true,
 });
 
-app.get('/test-db', async (req, res) => {
-  try { 
-    const result = await pool.query('SELECT NOW()');
+app.get("/test-db", async (req, res) => {
+  try {
+    const result = await pool.query("SELECT NOW()");
     res.json({ time: result.rows[0] });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
 
-app.use("/users", userRoutes)
+app.use("/users", userRoutes);

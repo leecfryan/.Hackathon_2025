@@ -1,13 +1,14 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
 import InputField from "../InputField/InputField";
 import Button from "../Button/Button";
-import EmailVerification from "../EmailVerification/EmailVerification";
-import mockEmailService from "../../services/mockEmailService";
 import styles from "./LoginForm.module.css";
 import axios from "axios";
 
 const LoginForm = ({ onSuccess }) => {
-  const [currentStep, setCurrentStep] = useState("login"); // 'login' or 'verify'
+  const navigate = useNavigate();
+  const { login } = useAuth();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -38,78 +39,46 @@ const LoginForm = ({ onSuccess }) => {
 
     setIsLoading(true);
 
-    // Simulate login validation
-    setTimeout(async () => {
-      console.log("Login attempt:", formData);
+    try {
+      const response = await axios.post(
+        "http://localhost:3001/users/login",
+        formData
+      );
 
-      // Check if email is already verified
-      const isVerified = mockEmailService.isEmailVerified(formData.email);
+      if (response.data.message === "success") {
+        // Set user data in AuthContext first
+        const userData = {
+          email: formData.email,
+          displayName:
+            response.data.user?.displayName ||
+            response.data.user?.firstName +
+              " " +
+              response.data.user?.lastName ||
+            "Student",
+          faculty: response.data.user?.faculty || "",
+          yearOfStudy: response.data.user?.yearOfStudy || "",
+        };
 
-      if (isVerified) {
-        // Email is verified, proceed with login
+        login(userData);
+
         setIsLoading(false);
-        axios.post("http://localhost:3001/users/login", formData)
-          .then((res) => {
-            if(res.data.message === "success") {
-              if (onSuccess) {
-                onSuccess();
-              } else {
-                alert("Login successful! Welcome back to SMOOFriends!");
-              }
-            } else {
-              alert("Login unsuccessful");
-            }
-          })
-          
-      } else {
-        // Email not verified, send verification code
-        try {
-          const result = await mockEmailService.sendVerificationEmail(
-            formData.email
-          );
-
-          if (result.success) {
-            setIsLoading(false);
-            setCurrentStep("verify");
-          } else {
-            setError("Failed to send verification email. Please try again.");
-            setIsLoading(false);
-          }
-        } catch (error) {
-          setError("Login failed. Please try again.");
-          setIsLoading(false);
+        if (onSuccess) {
+          onSuccess();
         }
+
+        // Navigate to HomePage after setting auth state
+        navigate("/home");
+      } else {
+        setError("Invalid email or password. Please try again.");
+        setIsLoading(false);
       }
-    }, 1000);
-  };
-
-  const handleVerificationSuccess = () => {
-    console.log("Email verified successfully for login:", formData.email);
-
-    if (onSuccess) {
-      onSuccess();
-    } else {
-      alert("Email verified! Login successful! Welcome to SMOOFriends!");
+    } catch (error) {
+      console.error("Login error:", error);
+      setError("Login failed. Please check your credentials and try again.");
+      setIsLoading(false);
     }
   };
 
-  const handleBackToLogin = () => {
-    setCurrentStep("login");
-  };
-
-  // Show verification step
-  if (currentStep === "verify") {
-    return (
-      <EmailVerification
-        email={formData.email}
-        firstName="" // We don't have first name in login
-        onVerificationSuccess={handleVerificationSuccess}
-        onBack={handleBackToLogin}
-      />
-    );
-  }
-
-  // Show login form
   return (
     <form className={styles.loginForm} onSubmit={handleSubmit}>
       {error && <div className={styles.errorBanner}>{error}</div>}
@@ -154,7 +123,7 @@ const LoginForm = ({ onSuccess }) => {
 
       <div className={styles.schoolEmailNotice}>
         <p>
-          <strong>Note:</strong> First-time login requires email verification
+          <strong>Note:</strong> Use your school email to access SMOOFriends
         </p>
       </div>
     </form>
