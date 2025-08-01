@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS requests (
     activity_type VARCHAR(50) CHECK (activity_type IN ('lunch', 'dinner', 'breakfast', 'study')),
     preferred_gender VARCHAR(10) CHECK (preferred_gender IN ('m', 'f', 'any')),
     preferred_faculty VARCHAR(100),
-    preferred_year INTEGER CHECK (preferred_year IN (1, 2, 3, 4)),
+    preferred_year INTEGER CHECK (preferred_year IN (1, 2, 3, 4, any)),
     meeting_date TIMESTAMP WITH TIME ZONE,
     status VARCHAR(20) CHECK (status IN ('pending', 'matched', 'expired', 'cancelled')) DEFAULT 'pending',
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),

@@ -3,16 +3,21 @@ import Button from "../Button/Button";
 import InputField from "../InputField/InputField";
 import SelectField from "../SelectField/SelectField";
 import styles from "./MeetingForm.module.css";
+import axios from "axios";
 
 const MeetingForm = ({ isOpen, onClose, onSubmit }) => {
+  const email = JSON.parse(localStorage.getItem("smoofriends_user")).email;
+
   const [formData, setFormData] = useState({
+    email: email,
     activity: "",
-    genderPreference: "",
-    facultyPreference: "",
-    yearPreference: "",
+    genderPreference: "any",
+    facultyPreference: "any",
+    yearPreference: "any",
     meetingDate: "",
     meetingHour: "",
   });
+
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
@@ -30,14 +35,13 @@ const MeetingForm = ({ isOpen, onClose, onSubmit }) => {
   ];
 
   const genderOptions = [
-    { value: "", label: "No preference" },
+    { value: "any", label: "No preference" },
     { value: "male", label: "Male" },
     { value: "female", label: "Female" },
-    { value: "any", label: "Any" },
   ];
 
   const facultyOptions = [
-    { value: "", label: "No preference" },
+    { value: "any", label: "No preference" },
     { value: "SCIS", label: "School of Computing and Information Systems" },
     { value: "LKCSB", label: "Lee Kong Chian School of Business" },
     { value: "SOSS", label: "School of Social Sciences" },
@@ -48,30 +52,29 @@ const MeetingForm = ({ isOpen, onClose, onSubmit }) => {
   ];
 
   const yearOptions = [
-    { value: "", label: "No preference" },
+    { value: "any", label: "No preference" },
     { value: "1", label: "Year 1" },
     { value: "2", label: "Year 2" },
     { value: "3", label: "Year 3" },
     { value: "4", label: "Year 4" },
-    { value: "graduate", label: "Graduate Student" },
-    { value: "any", label: "Any Year" },
+    { value: "5", label: "Graduate Student" },
   ];
 
   const hourOptions = [
     { value: "", label: "Select time" },
-    { value: "08:00", label: "8:00 AM" },
-    { value: "09:00", label: "9:00 AM" },
-    { value: "10:00", label: "10:00 AM" },
-    { value: "11:00", label: "11:00 AM" },
-    { value: "12:00", label: "12:00 PM" },
-    { value: "13:00", label: "1:00 PM" },
-    { value: "14:00", label: "2:00 PM" },
-    { value: "15:00", label: "3:00 PM" },
-    { value: "16:00", label: "4:00 PM" },
-    { value: "17:00", label: "5:00 PM" },
-    { value: "18:00", label: "6:00 PM" },
-    { value: "19:00", label: "7:00 PM" },
-    { value: "20:00", label: "8:00 PM" },
+    { value: "8", label: "8:00 AM" },
+    { value: "9", label: "9:00 AM" },
+    { value: "10", label: "10:00 AM" },
+    { value: "11", label: "11:00 AM" },
+    { value: "12", label: "12:00 PM" },
+    { value: "13", label: "1:00 PM" },
+    { value: "14", label: "2:00 PM" },
+    { value: "15", label: "3:00 PM" },
+    { value: "16", label: "4:00 PM" },
+    { value: "17", label: "5:00 PM" },
+    { value: "18", label: "6:00 PM" },
+    { value: "19", label: "7:00 PM" },
+    { value: "20", label: "8:00 PM" },
   ];
 
   const handleInputChange = (e) => {
@@ -127,15 +130,25 @@ const MeetingForm = ({ isOpen, onClose, onSubmit }) => {
     setLoading(true);
     try {
       await onSubmit(formData);
-      // Reset form after successful submission
-      setFormData({
-        activity: "",
-        genderPreference: "",
-        facultyPreference: "",
-        yearPreference: "",
-        meetingDate: "",
-        meetingHour: "",
-      });
+      const response = await axios.post(
+        "http://localhost:3001/requests/submit",
+        formData
+      );
+      console.log(response.data.message);
+      if (response.data.message === "success") {
+        // Reset form after successful submission
+        setFormData({
+          email: email,
+          activity: "",
+          genderPreference: "",
+          facultyPreference: "",
+          yearPreference: "",
+          meetingDate: "",
+          meetingHour: "",
+        });
+      } else {
+        alert("Error submitting meeting request.");
+      }
       setErrors({});
       onClose();
     } catch (error) {
@@ -150,10 +163,11 @@ const MeetingForm = ({ isOpen, onClose, onSubmit }) => {
 
   const handleClose = () => {
     setFormData({
+      email: email,
       activity: "",
-      genderPreference: "",
-      facultyPreference: "",
-      yearPreference: "",
+      genderPreference: "any",
+      facultyPreference: "any",
+      yearPreference: "any",
       meetingDate: "",
       meetingHour: "",
     });

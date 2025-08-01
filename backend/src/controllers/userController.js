@@ -24,9 +24,9 @@ export async function registerHandler (req,res) {
         const success = await register(email, password, gender, faculty, yearOfStudy, display, firstName, lastName);
 
         if(success) {
-            res.json({message: "success"});
+            return res.json({message: "success"});
         } else {
-            res.json({message: "failed"});
+            return res.json({message: "failed"});
         }
     } catch (error) {
         console.error(error);

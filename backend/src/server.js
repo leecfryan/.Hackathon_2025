@@ -49,6 +49,7 @@ app.get("/test-db", async (req, res) => {
 app.use("/users", userRoutes);
 app.use("/routes", requestRoutes);
 app.use("/chat", chatRoutes);
+app.use("/requests", requestRoutes);
 
 // Start the Socket.io server
 server.listen(3002, () => {
