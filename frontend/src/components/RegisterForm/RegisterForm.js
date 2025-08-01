@@ -5,6 +5,7 @@ import Button from "../Button/Button";
 import EmailVerification from "../EmailVerification/EmailVerification";
 import mockEmailService from "../../services/mockEmailService";
 import styles from "./RegisterForm.module.css";
+import axios from "axios";
 
 const RegisterForm = ({ onSuccess }) => {
   const [currentStep, setCurrentStep] = useState("register"); // 'register' or 'verify'
@@ -36,12 +37,12 @@ const RegisterForm = ({ onSuccess }) => {
 
   const yearOptions = [
     { value: "", label: "Select year" },
-    { value: "freshman", label: "Freshman (1st Year)" },
-    { value: "sophomore", label: "Sophomore (2nd Year)" },
-    { value: "junior", label: "Junior (3rd Year)" },
-    { value: "senior", label: "Senior (4th Year)" },
-    { value: "graduate", label: "Graduate Student" },
-    { value: "phd", label: "PhD Student" },
+    { value: "1", label: "Freshman (1st Year)" },
+    { value: "2", label: "Sophomore (2nd Year)" },
+    { value: "3", label: "Junior (3rd Year)" },
+    { value: "4", label: "Senior (4th Year)" },
+    { value: "5", label: "Graduate Student" },
+    { value: "6", label: "PhD Student" },
   ];
 
   const handleChange = (e) => {
@@ -64,6 +65,18 @@ const RegisterForm = ({ onSuccess }) => {
     return "";
   };
 
+  async function checkEmailExists(email) {
+    try {
+      const res = await axios.get("http://localhost:3001/users/checkIfEmailExists", {
+        params: { email }
+      });
+      return res.data.exists; // true or false
+    } catch (err) {
+      console.error("Error checking email:", err);
+      return false;
+    }
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -80,6 +93,12 @@ const RegisterForm = ({ onSuccess }) => {
 
     if (formData.password.length < 8) {
       setError("Password must be at least 8 characters long");
+      return;
+    }
+
+    const exists = await checkEmailExists(formData.email);
+    if(exists) {
+      setError("Email is already in use");
       return;
     }
 
@@ -111,6 +130,11 @@ const RegisterForm = ({ onSuccess }) => {
 
     // Here you would typically save the user data to your backend
     // For now, we'll just call the success callback
+    axios.post("http://localhost:3001/users/register", formData)
+      .then((res) => {
+        console.log(res);
+      })
+
     if (onSuccess) {
       onSuccess();
     } else {
@@ -200,8 +224,8 @@ const RegisterForm = ({ onSuccess }) => {
                 <input
                   type="radio"
                   name="gender"
-                  value="male"
-                  checked={formData.gender === "male"}
+                  value="m"
+                  checked={formData.gender === "m"}
                   onChange={handleChange}
                   required
                 />
@@ -212,8 +236,8 @@ const RegisterForm = ({ onSuccess }) => {
                 <input
                   type="radio"
                   name="gender"
-                  value="female"
-                  checked={formData.gender === "female"}
+                  value="f"
+                  checked={formData.gender === "f"}
                   onChange={handleChange}
                   required
                 />

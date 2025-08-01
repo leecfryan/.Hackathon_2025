@@ -17,8 +17,9 @@ export async function checkIfEmailExistsHandler (req,res) {
 
 export async function registerHandler (req,res) {
     try {
-        const {email, password, gender, faculty, year} = req.body;
-        const success = await register(email, password, gender, faculty, year);
+        const {email, password, gender, faculty, yearOfStudy, firstName, lastName} = req.body;
+        const display = firstName + " " + lastName;
+        const success = await register(email, password, gender, faculty, yearOfStudy, display);
 
         if(success) {
             res.status(201).json({message: "User created."});

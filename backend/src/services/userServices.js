@@ -16,13 +16,13 @@ export async function login(email, password) {
     }
 }
 
-export async function register(email, password, gender, faculty, year) {
+export async function register(email, password, gender, faculty, year, display) {
     try {
         const salt = await bcrypt.genSalt(saltRounds);
         const hashedPassword = await bcrypt.hash(password,salt);
-        const query = `insert into users (email, password, gender, faculty, year_of_enroll)
-            values ($1, $2, $3, $4, $5)`;
-        const values = [email, hashedPassword, gender, faculty, year];
+        const query = `insert into users (email, password, gender, faculty, year_of_study, display_name)
+            values ($1, $2, $3, $4, $5, $6)`;
+        const values = [email, hashedPassword, gender, faculty, year, display];
         const result = await pool.query(query, values);
         return result.rowCount > 0;
     } catch (error) {
