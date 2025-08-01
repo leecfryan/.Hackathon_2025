@@ -35,7 +35,7 @@ const HeatMap = () => {
             reportCount: 18,
             lastUpdated: "5 minutes ago",
             description: "Main project collaboration area",
-            coordinates: { x: 35, y: 35 },
+            coordinates: { x: 15, y: 40 },
           },
           {
             id: 2,
@@ -44,7 +44,7 @@ const HeatMap = () => {
             reportCount: 32,
             lastUpdated: "2 minutes ago",
             description: "Student lounge and study area",
-            coordinates: { x: 38, y: 32 },
+            coordinates: { x: 35, y: 38 },
           },
           {
             id: 3,
@@ -53,7 +53,7 @@ const HeatMap = () => {
             reportCount: 12,
             lastUpdated: "15 minutes ago",
             description: "Programming and development labs",
-            coordinates: { x: 32, y: 38 },
+            coordinates: { x: 15, y: 35 },
           },
         ],
       },
@@ -68,7 +68,7 @@ const HeatMap = () => {
             reportCount: 45,
             lastUpdated: "1 minute ago",
             description: "Main business school atrium and gathering space",
-            coordinates: { x: 65, y: 58 },
+            coordinates: { x: 65, y: 60 },
           },
           {
             id: 5,
@@ -77,7 +77,7 @@ const HeatMap = () => {
             reportCount: 28,
             lastUpdated: "8 minutes ago",
             description: "Large lecture theaters for business courses",
-            coordinates: { x: 68, y: 55 },
+            coordinates: { x: 65, y: 65 },
           },
           {
             id: 6,
@@ -86,7 +86,7 @@ const HeatMap = () => {
             reportCount: 9,
             lastUpdated: "20 minutes ago",
             description: "Interactive case study discussion rooms",
-            coordinates: { x: 62, y: 60 },
+            coordinates: { x: 68, y: 65 },
           },
         ],
       },
@@ -101,7 +101,7 @@ const HeatMap = () => {
             reportCount: 22,
             lastUpdated: "6 minutes ago",
             description: "Glass-walled study area on Level 1",
-            coordinates: { x: 25, y: 35 },
+            coordinates: { x: 15, y: 41 },
           },
           {
             id: 8,
@@ -110,7 +110,7 @@ const HeatMap = () => {
             reportCount: 35,
             lastUpdated: "3 minutes ago",
             description: "Social sciences student lounge",
-            coordinates: { x: 28, y: 38 },
+            coordinates: { x: 52, y: 90 },
           },
           {
             id: 9,
@@ -119,7 +119,7 @@ const HeatMap = () => {
             reportCount: 8,
             lastUpdated: "25 minutes ago",
             description: "Basement level study pods",
-            coordinates: { x: 22, y: 32 },
+            coordinates: { x: 16, y: 42 },
           },
         ],
       },
@@ -134,7 +134,7 @@ const HeatMap = () => {
             reportCount: 19,
             lastUpdated: "10 minutes ago",
             description: "Main lecture halls for economics courses",
-            coordinates: { x: 45, y: 42 },
+            coordinates: { x: 20, y: 40 },
           },
           {
             id: 11,
@@ -143,7 +143,7 @@ const HeatMap = () => {
             reportCount: 31,
             lastUpdated: "4 minutes ago",
             description: "Advanced computing laboratories",
-            coordinates: { x: 48, y: 45 },
+            coordinates: { x: 30, y: 40 },
           },
           {
             id: 12,
@@ -152,7 +152,7 @@ const HeatMap = () => {
             reportCount: 7,
             lastUpdated: "18 minutes ago",
             description: "Small group discussion and seminar rooms",
-            coordinates: { x: 42, y: 39 },
+            coordinates: { x: 30, y: 38 },
           },
         ],
       },
@@ -167,7 +167,7 @@ const HeatMap = () => {
             reportCount: 11,
             lastUpdated: "22 minutes ago",
             description: "Graduate student lounge and study area",
-            coordinates: { x: 55, y: 25 },
+            coordinates: { x: 75, y: 20 },
           },
           {
             id: 14,
@@ -176,7 +176,7 @@ const HeatMap = () => {
             reportCount: 16,
             lastUpdated: "12 minutes ago",
             description: "Student administrative services",
-            coordinates: { x: 58, y: 28 },
+            coordinates: { x: 78, y: 18 },
           },
           {
             id: 15,
@@ -185,7 +185,7 @@ const HeatMap = () => {
             reportCount: 5,
             lastUpdated: "30 minutes ago",
             description: "Administrative meeting and conference rooms",
-            coordinates: { x: 52, y: 22 },
+            coordinates: { x: 77, y: 20 },
           },
         ],
       },
@@ -200,7 +200,7 @@ const HeatMap = () => {
             reportCount: 24,
             lastUpdated: "7 minutes ago",
             description: "Main lecture theaters for accounting courses",
-            coordinates: { x: 75, y: 45 },
+            coordinates: { x: 50, y: 62 },
           },
           {
             id: 17,
@@ -209,7 +209,7 @@ const HeatMap = () => {
             reportCount: 29,
             lastUpdated: "5 minutes ago",
             description: "Dedicated study spaces for accounting students",
-            coordinates: { x: 78, y: 48 },
+            coordinates: { x: 50, y: 64 },
           },
           {
             id: 18,
@@ -218,7 +218,7 @@ const HeatMap = () => {
             reportCount: 6,
             lastUpdated: "28 minutes ago",
             description: "Small tutorial and discussion rooms",
-            coordinates: { x: 72, y: 42 },
+            coordinates: { x: 52, y: 60 },
           },
         ],
       },
@@ -233,7 +233,7 @@ const HeatMap = () => {
             reportCount: 52,
             lastUpdated: "1 minute ago",
             description: "Main study areas and group discussion zones",
-            coordinates: { x: 52, y: 48 },
+            coordinates: { x: 48, y: 50 },
           },
           {
             id: 20,
@@ -242,7 +242,7 @@ const HeatMap = () => {
             reportCount: 33,
             lastUpdated: "6 minutes ago",
             description: "Quiet individual study spaces",
-            coordinates: { x: 54, y: 46 },
+            coordinates: { x: 47, y: 50 },
           },
           {
             id: 21,
@@ -251,7 +251,7 @@ const HeatMap = () => {
             reportCount: 14,
             lastUpdated: "15 minutes ago",
             description: "Research materials and archives",
-            coordinates: { x: 50, y: 50 },
+            coordinates: { x: 45, y: 50 },
           },
         ],
       },
@@ -266,7 +266,7 @@ const HeatMap = () => {
             reportCount: 21,
             lastUpdated: "9 minutes ago",
             description: "Kwa Geok Choo Law Library",
-            coordinates: { x: 45, y: 78 },
+            coordinates: { x: 50, y: 85 },
           },
           {
             id: 23,
@@ -275,7 +275,7 @@ const HeatMap = () => {
             reportCount: 4,
             lastUpdated: "35 minutes ago",
             description: "Practice courtroom for law students",
-            coordinates: { x: 48, y: 75 },
+            coordinates: { x: 48, y: 86 },
           },
           {
             id: 24,
@@ -284,7 +284,7 @@ const HeatMap = () => {
             reportCount: 27,
             lastUpdated: "4 minutes ago",
             description: "Main lecture theaters for law courses",
-            coordinates: { x: 42, y: 80 },
+            coordinates: { x: 45, y: 88 },
           },
         ],
       },
@@ -299,7 +299,7 @@ const HeatMap = () => {
             reportCount: 41,
             lastUpdated: "2 minutes ago",
             description: "Open collaborative study and social space",
-            coordinates: { x: 60, y: 65 },
+            coordinates: { x: 50, y: 72 },
           },
           {
             id: 26,
@@ -308,7 +308,7 @@ const HeatMap = () => {
             reportCount: 38,
             lastUpdated: "8 minutes ago",
             description: "Main dining area with various food options",
-            coordinates: { x: 63, y: 68 },
+            coordinates: { x: 48, y: 72 },
           },
           {
             id: 27,
@@ -317,7 +317,7 @@ const HeatMap = () => {
             reportCount: 12,
             lastUpdated: "20 minutes ago",
             description: "Multi-purpose event and gathering spaces",
-            coordinates: { x: 57, y: 62 },
+            coordinates: { x: 51, y: 72 },
           },
         ],
       },
@@ -498,10 +498,10 @@ const HeatMap = () => {
           <div className={styles.mapSection}>
             <div className={styles.campusMap}>
               <div className={styles.mapTitle}>SMU Campus Overview</div>
-              <div className={styles.mapPlaceholder}>
+              {/* <div className={styles.mapPlaceholder}>
                 <h4>🗺️ Campus Map</h4>
                 <p>Interactive location markers below</p>
-              </div>
+              </div> */}
               {allLocations.map((location) => (
                 <div
                   key={location.id}
