@@ -1,12 +1,15 @@
-const express = require('express');
-const cors = require('cors');
-const { Pool } = require('pg');
-const http = require('http');
-const socketIo = require('socket.io');
-require('dotenv').config();
+import express from "express";
+import cors from "cors";
+import http from "http";
+import { Server } from "socket.io";
+import pool from "./config/db.js";
+import dotenv from "dotenv";
+
+import userRoutes from "./routes/userRoutes.js";
 
 const app = express();
 const server = http.createServer(app);
+dotenv.config()
 
 app.use(express.json())
 app.use(cors({
@@ -15,7 +18,9 @@ app.use(cors({
     credentials: true,
 }))
 
-const io = socketIo(server, {
+app.listen(3001)
+
+const io = new Server (server, {
   cors: {
     origin: "http://localhost:3000", 
     methods: ["GET", "POST"],
@@ -24,15 +29,13 @@ const io = socketIo(server, {
   allowEIO3: true
 });
 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
-});
-
-pool.query('SELECT NOW()', (err, res) => {
-  if (err) {
-    console.error('Database connection error:', err);
-  } else {
-    console.log('✅ Database connected successfully');
+app.get('/test-db', async (req, res) => {
+  try { 
+    const result = await pool.query('SELECT NOW()');
+    res.json({ time: result.rows[0] });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
+
+app.use("/users", userRoutes)
