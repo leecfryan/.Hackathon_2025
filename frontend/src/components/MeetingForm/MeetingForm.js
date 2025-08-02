@@ -131,7 +131,7 @@ const MeetingForm = ({ isOpen, onClose, onSubmit }) => {
     try {
       await onSubmit(formData);
       const response = await axios.post(
-        "http://35.213.190.54:3001/requests/submit",
+        "https://35.213.190.54:3001/requests/submit",
         formData
       );
       console.log(response.data.message);
@@ -140,7 +140,7 @@ const MeetingForm = ({ isOpen, onClose, onSubmit }) => {
 
         const requestId = response.data.requestId;
         const findMatch = await axios.post(
-          "http://35.213.190.54:3001/requests/check",
+          "https://35.213.190.54:3001/requests/check",
           { requestId, email }
         );
 

@@ -2,7 +2,7 @@
 
 export class ChatAPI {
   static BASE_URL =
-    process.env.REACT_APP_API_URL || "http://35.213.190.54:3001/api";
+    process.env.REACT_APP_API_URL || "https://35.213.190.54:3001/api";
   static TIMEOUT = 10000; // 10 second timeout
 
   // Helper method for making API requests

@@ -66,7 +66,7 @@ const RegisterForm = ({ onSuccess }) => {
   async function checkEmailExists(email) {
     try {
       const res = await axios.get(
-        "http://35.213.190.54:3001/users/checkIfEmailExists",
+        "https://35.213.190.54:3001/users/checkIfEmailExists",
         {
           params: { email },
         }
@@ -126,7 +126,7 @@ const RegisterForm = ({ onSuccess }) => {
 
     // try {
     //   const response = await axios.post(
-    //     "http://35.213.190.54:3001/email/send-verification",
+    //     "https://35.213.190.54:3001/email/send-verification",
     //     formData
     //   );
 
@@ -152,7 +152,7 @@ const RegisterForm = ({ onSuccess }) => {
     // Here you would typically save the user data to your backend
     // For now, we'll just call the success callback
     axios
-      .post("http://35.213.190.54:3001/users/register", formData)
+      .post("https://35.213.190.54:3001/users/register", formData)
       .then((res) => {
         if (res.data.message === "success") {
           if (onSuccess) {

@@ -12,7 +12,7 @@ export const initializeSocket = (userId) => {
 
   console.log("🔌 Initializing socket connection...");
 
-  socket = io("http://35.213.190.54:3001", {
+  socket = io("https://35.213.190.54:3001", {
     transports: ["websocket", "polling"], // Try websocket first, fallback to polling
     timeout: 10000,
     reconnection: true,
@@ -45,7 +45,7 @@ export const initializeSocket = (userId) => {
   socket.on("connect_error", (error) => {
     console.error("🚨 Socket.io connection error:", error);
     console.log(
-      "💡 Make sure your backend server is running on http://35.213.190.54:3001"
+      "💡 Make sure your backend server is running on https://35.213.190.54:3001"
     );
 
     // Try different approaches based on error

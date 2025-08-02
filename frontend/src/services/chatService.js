@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://35.213.190.54:3001";
+const API_BASE_URL = "https://35.213.190.54:3001";
 
 class ChatService {
   // Get all conversations for a user
