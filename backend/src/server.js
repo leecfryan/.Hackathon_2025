@@ -8,6 +8,7 @@ import dotenv from "dotenv";
 import userRoutes from "./routes/userRoutes.js";
 import requestRoutes from "./routes/requestRoutes.js";
 import chatRoutes from "./routes/chatRoutes.js";
+import emailRoutes from "./routes/email.js"; // Add this import
 import { handleSocketConnection } from "./controllers/socketHandler.js";
 
 const app = express();
@@ -50,6 +51,7 @@ app.use("/users", userRoutes);
 app.use("/routes", requestRoutes);
 app.use("/chat", chatRoutes);
 app.use("/requests", requestRoutes);
+app.use("/email", emailRoutes); // Add email routes under /api prefix
 
 // Start the Socket.io server
 server.listen(3002, () => {
