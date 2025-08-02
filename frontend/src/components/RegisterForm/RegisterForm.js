@@ -130,11 +130,15 @@ const RegisterForm = ({ onSuccess }) => {
         formData
       );
 
-      if (response.status === 200) {
+      if (response.status === 200 && response.data.success) {
         console.log("Verification email sent successfully!");
         setCurrentStep("verify"); // Move to verification step
+      } else {
+        // Handle case where status is 200 but success is false
+        setError(response.data.message || "Failed to send email");
       }
     } catch (error) {
+      console.error("Error:", error);
       setError(error.response?.data?.message || "Failed to send email");
     } finally {
       setIsLoading(false);

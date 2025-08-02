@@ -1,4 +1,4 @@
-// Option 1: Express.js API Route - backend/routes/email.js
+// routes/email.js
 import express from "express";
 import { sendVerificationEmail } from "../utils/sendEmail.js";
 
@@ -32,10 +32,16 @@ router.post("/send-verification", async (req, res) => {
       100000 + Math.random() * 900000
     ).toString();
 
+    console.log(`Sending verification code ${verificationCode} to ${email}`);
+
     // Send email
     const result = await sendVerificationEmail(email, verificationCode);
 
-    if (result.success) {
+    // Add debug logging
+    console.log("Email send result:", result);
+
+    // Check if result exists and has success property
+    if (result && result.success) {
       // Store verification code with expiration (10 minutes)
       verificationCodes.set(email, {
         code: verificationCode,
@@ -43,14 +49,17 @@ router.post("/send-verification", async (req, res) => {
         attempts: 0,
       });
 
+      console.log(`Verification code stored for ${email}`);
+
       res.status(200).json({
         success: true,
         message: "Verification email sent successfully",
       });
     } else {
+      console.error("Email sending failed:", result?.error || "Unknown error");
       res.status(500).json({
         success: false,
-        message: "Failed to send verification email",
+        message: result?.error || "Failed to send verification email",
       });
     }
   } catch (error) {
