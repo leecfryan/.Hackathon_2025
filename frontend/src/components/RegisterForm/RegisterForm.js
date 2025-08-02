@@ -124,227 +124,222 @@ const RegisterForm = ({ onSuccess }) => {
       setIsLoading(false);
     }
 
-    //   try {
-    //     const response = await axios.post(
-    //       "http://localhost:3001/email/send-verification",
-    //       formData
-    //     );
+    // try {
+    //   const response = await axios.post(
+    //     "http://localhost:3001/email/send-verification",
+    //     formData
+    //   );
 
-    //     if (response.status === 200 && response.data.success) {
-    //       console.log("Verification email sent successfully!");
-    //       setCurrentStep("verify"); // Move to verification step
-    //     } else {
-    //       // Handle case where status is 200 but success is false
-    //       setError(response.data.message || "Failed to send email");
-    //     }
-    //   } catch (error) {
-    //     console.error("Error:", error);
-    //     setError(error.response?.data?.message || "Failed to send email");
-    //   } finally {
-    //     setIsLoading(false);
+    //   if (response.status === 200 && response.data.success) {
+    //     console.log("Verification email sent successfully!");
+    //     setCurrentStep("verify"); // Move to verification step
+    //   } else {
+    //     // Handle case where status is 200 but success is false
+    //     setError(response.data.message || "Failed to send email");
     //   }
-    // };
+    // } catch (error) {
+    //   console.error("Error:", error);
+    //   setError(error.response?.data?.message || "Failed to send email");
+    // } finally {
+    //   setIsLoading(false);
+    // }
+  };
 
-    const handleVerificationSuccess = () => {
-      console.log("Email verified successfully for:", formData.email);
-      console.log("Complete registration data:", formData);
+  const handleVerificationSuccess = () => {
+    console.log("Email verified successfully for:", formData.email);
+    console.log("Complete registration data:", formData);
 
-      // Here you would typically save the user data to your backend
-      // For now, we'll just call the success callback
-      axios
-        .post("http://localhost:3001/users/register", formData)
-        .then((res) => {
-          if (res.data.message === "success") {
-            if (onSuccess) {
-              onSuccess();
-            } else {
-              alert(
-                "Registration completed successfully! Welcome to SMOOFriends!"
-              );
-            }
-          } else {
-            alert("Registration failed");
-          }
-        });
-    };
+    // Here you would typically save the user data to your backend
+    // For now, we'll just call the success callback
+    axios.post("http://localhost:3001/users/register", formData).then((res) => {
+      if (res.data.message === "success") {
+        if (onSuccess) {
+          onSuccess();
+        } else {
+          alert("Registration completed successfully! Welcome to SMOOFriends!");
+        }
+      } else {
+        alert("Registration failed");
+      }
+    });
+  };
 
-    const handleBackToRegistration = () => {
-      setCurrentStep("register");
-    };
+  const handleBackToRegistration = () => {
+    setCurrentStep("register");
+  };
 
-    // Show verification step
-    if (currentStep === "verify") {
-      return (
-        <EmailVerification
-          email={formData.email}
-          firstName={formData.firstName}
-          onVerificationSuccess={handleVerificationSuccess}
-          onBack={handleBackToRegistration}
-        />
-      );
-    }
-
-    // Show registration form
+  // Show verification step
+  if (currentStep === "verify") {
     return (
-      <form className={styles.registerForm} onSubmit={handleSubmit}>
-        {error && <div className={styles.errorBanner}>{error}</div>}
+      <EmailVerification
+        email={formData.email}
+        firstName={formData.firstName}
+        onVerificationSuccess={handleVerificationSuccess}
+        onBack={handleBackToRegistration}
+      />
+    );
+  }
 
-        <div className={styles.formFields}>
-          <div className={styles.nameFields}>
-            <InputField
-              type="text"
-              name="firstName"
-              placeholder="First name"
-              label="First Name"
-              value={formData.firstName}
-              onChange={handleChange}
-              required
-            />
+  // Show registration form
+  return (
+    <form className={styles.registerForm} onSubmit={handleSubmit}>
+      {error && <div className={styles.errorBanner}>{error}</div>}
 
-            <InputField
-              type="text"
-              name="lastName"
-              placeholder="Last name"
-              label="Last Name"
-              value={formData.lastName}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
+      <div className={styles.formFields}>
+        <div className={styles.nameFields}>
           <InputField
-            type="email"
-            name="email"
-            placeholder="Enter your school email (.edu)"
-            label="School Email Address"
-            value={formData.email}
+            type="text"
+            name="firstName"
+            placeholder="First name"
+            label="First Name"
+            value={formData.firstName}
             onChange={handleChange}
             required
           />
 
-          {formData.email && validateSchoolEmail(formData.email) && (
-            <div className={styles.universityDetected}>
-              <span>
-                🎓 University detected:{" "}
-                {extractUniversityFromEmail(formData.email)}
-              </span>
-            </div>
-          )}
+          <InputField
+            type="text"
+            name="lastName"
+            placeholder="Last name"
+            label="Last Name"
+            value={formData.lastName}
+            onChange={handleChange}
+            required
+          />
+        </div>
 
-          <div className={styles.studentFields}>
-            <SelectField
-              name="faculty"
-              label="Faculty/Department"
-              value={formData.faculty}
-              onChange={handleChange}
-              options={facultyOptions}
-              required
-            />
+        <InputField
+          type="email"
+          name="email"
+          placeholder="Enter your school email (.edu)"
+          label="School Email Address"
+          value={formData.email}
+          onChange={handleChange}
+          required
+        />
 
-            <div className={styles.genderField}>
-              <label className={styles.fieldLabel}>
-                Gender <span className={styles.required}>*</span>
+        {formData.email && validateSchoolEmail(formData.email) && (
+          <div className={styles.universityDetected}>
+            <span>
+              🎓 University detected:{" "}
+              {extractUniversityFromEmail(formData.email)}
+            </span>
+          </div>
+        )}
+
+        <div className={styles.studentFields}>
+          <SelectField
+            name="faculty"
+            label="Faculty/Department"
+            value={formData.faculty}
+            onChange={handleChange}
+            options={facultyOptions}
+            required
+          />
+
+          <div className={styles.genderField}>
+            <label className={styles.fieldLabel}>
+              Gender <span className={styles.required}>*</span>
+            </label>
+            <div className={styles.radioGroup}>
+              <label className={styles.radioOption}>
+                <input
+                  type="radio"
+                  name="gender"
+                  value="m"
+                  checked={formData.gender === "m"}
+                  onChange={handleChange}
+                  required
+                />
+                <span className={styles.radioButton}></span>
+                Male
               </label>
-              <div className={styles.radioGroup}>
-                <label className={styles.radioOption}>
-                  <input
-                    type="radio"
-                    name="gender"
-                    value="m"
-                    checked={formData.gender === "m"}
-                    onChange={handleChange}
-                    required
-                  />
-                  <span className={styles.radioButton}></span>
-                  Male
-                </label>
-                <label className={styles.radioOption}>
-                  <input
-                    type="radio"
-                    name="gender"
-                    value="f"
-                    checked={formData.gender === "f"}
-                    onChange={handleChange}
-                    required
-                  />
-                  <span className={styles.radioButton}></span>
-                  Female
-                </label>
-                <label className={styles.radioOption}>
-                  <input
-                    type="radio"
-                    name="gender"
-                    value="other"
-                    checked={formData.gender === "other"}
-                    onChange={handleChange}
-                    required
-                  />
-                  <span className={styles.radioButton}></span>
-                  Other
-                </label>
-              </div>
+              <label className={styles.radioOption}>
+                <input
+                  type="radio"
+                  name="gender"
+                  value="f"
+                  checked={formData.gender === "f"}
+                  onChange={handleChange}
+                  required
+                />
+                <span className={styles.radioButton}></span>
+                Female
+              </label>
+              <label className={styles.radioOption}>
+                <input
+                  type="radio"
+                  name="gender"
+                  value="other"
+                  checked={formData.gender === "other"}
+                  onChange={handleChange}
+                  required
+                />
+                <span className={styles.radioButton}></span>
+                Other
+              </label>
             </div>
-
-            <SelectField
-              name="yearOfStudy"
-              label="Year of Study"
-              value={formData.yearOfStudy}
-              onChange={handleChange}
-              options={yearOptions}
-              required
-            />
           </div>
 
-          <div className={styles.passwordFields}>
-            <InputField
-              type="password"
-              name="password"
-              placeholder="Create a strong password (8+ characters)"
-              label="Password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-            />
-
-            <InputField
-              type="password"
-              name="confirmPassword"
-              placeholder="Confirm your password"
-              label="Confirm Password"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              required
-            />
-          </div>
+          <SelectField
+            name="yearOfStudy"
+            label="Year of Study"
+            value={formData.yearOfStudy}
+            onChange={handleChange}
+            options={yearOptions}
+            required
+          />
         </div>
 
-        <div className={styles.termsContainer}>
-          <label className={styles.checkboxContainer}>
-            <input type="checkbox" required />
-            <span className={styles.checkmark}></span>I agree to the{" "}
-            <a href="#" className={styles.termsLink}>
-              SMOOFriends Terms of Service
-            </a>{" "}
-            and{" "}
-            <a href="#" className={styles.termsLink}>
-              Privacy Policy
-            </a>
-          </label>
-        </div>
+        <div className={styles.passwordFields}>
+          <InputField
+            type="password"
+            name="password"
+            placeholder="Create a strong password (8+ characters)"
+            label="Password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
 
-        <Button type="submit" variant="primary" fullWidth loading={isLoading}>
-          Create Account & Send Verification
-        </Button>
-
-        <div className={styles.verificationNotice}>
-          <p>
-            📧 We'll send a 6-digit verification code to your school email for
-            confirmation.
-          </p>
+          <InputField
+            type="password"
+            name="confirmPassword"
+            placeholder="Confirm your password"
+            label="Confirm Password"
+            value={formData.confirmPassword}
+            onChange={handleChange}
+            required
+          />
         </div>
-      </form>
-    );
-  };
+      </div>
+
+      <div className={styles.termsContainer}>
+        <label className={styles.checkboxContainer}>
+          <input type="checkbox" required />
+          <span className={styles.checkmark}></span>I agree to the{" "}
+          <a href="#" className={styles.termsLink}>
+            SMOOFriends Terms of Service
+          </a>{" "}
+          and{" "}
+          <a href="#" className={styles.termsLink}>
+            Privacy Policy
+          </a>
+        </label>
+      </div>
+
+      <Button type="submit" variant="primary" fullWidth loading={isLoading}>
+        Create Account & Send Verification
+      </Button>
+
+      <div className={styles.verificationNotice}>
+        <p>
+          📧 We'll send a 6-digit verification code to your school email for
+          confirmation.
+        </p>
+      </div>
+    </form>
+  );
 };
 
 export default RegisterForm;
