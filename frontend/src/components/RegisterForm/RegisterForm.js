@@ -3,7 +3,7 @@ import InputField from "../InputField/InputField";
 import SelectField from "../SelectField/SelectField";
 import Button from "../Button/Button";
 import EmailVerification from "../EmailVerification/EmailVerification";
-import mockEmailService from "../../services/mockEmailService";
+// import mockEmailService from "../../services/mockEmailService";
 import styles from "./RegisterForm.module.css";
 import axios from "axios";
 

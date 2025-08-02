@@ -6,7 +6,14 @@ import styles from "./Chat.module.css";
 // Import our chat utilities
 import { ChatAPI } from "../../services/chatAPI";
 import { ChatStorage } from "../../utils/chatStorage";
-import { sendPrivateMessage, initializeSocket, onPrivateMessage, offPrivateMessage } from "../../socket/socket";
+import { 
+  sendPrivateMessage, 
+  initializeSocket, 
+  onPrivateMessage, 
+  offPrivateMessage,
+  getSocket,
+  disconnectSocket
+} from "../../socket/socket";
 
 // User configuration
 const ALICE_USER = {
@@ -43,12 +50,9 @@ const Chat = () => {
     }
 
     return () => {
-      // Cleanup socket connection
+      // Cleanup socket connection - FIXED
       offPrivateMessage();
-      const socket = initializeSocket();
-      if (socket) {
-        socket.disconnect();
-      }
+      disconnectSocket();
     };
   }, [user]);
 
@@ -57,13 +61,13 @@ const Chat = () => {
       console.log("Initializing chat for user:", user.id);
       setLoading(true);
 
-      // Initialize socket connection
-      const socket = initializeSocket();
+      // Initialize socket connection with user ID
+      const socket = initializeSocket(TERRY_USER_ID);
       
+      // Set up connection status handlers
       socket.on('connect', () => {
         console.log('✅ Socket connected');
         setConnectionStatus('connected');
-        socket.emit('join', TERRY_USER_ID);
       });
 
       socket.on('disconnect', () => {
@@ -298,8 +302,16 @@ const Chat = () => {
       
       ChatStorage.saveConversation(TERRY_USER_ID, ALICE_USER.uid, storageFormat);
 
-      // Send via socket
-      sendPrivateMessage(ALICE_USER.uid, messageData.content);
+      // Send via socket - FIXED: proper message format
+      const socketMessageData = {
+        to: ALICE_USER.uid,
+        message: messageData.content,
+        from: TERRY_USER_ID,
+        timestamp: timestamp,
+        id: messageId
+      };
+      
+      sendPrivateMessage(socketMessageData);
 
       // Send to server API
       await ChatAPI.sendMessage({

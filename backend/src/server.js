@@ -8,13 +8,15 @@ import dotenv from "dotenv";
 import userRoutes from "./routes/userRoutes.js";
 import requestRoutes from "./routes/requestRoutes.js";
 import chatRoutes from "./routes/chatRoutes.js";
-import emailRoutes from "./routes/email.js"; // Add this import
+import emailRoutes from "./routes/email.js";
 import { handleSocketConnection } from "./controllers/socketHandler.js";
 
-const app = express();
-const server = http.createServer(app);
 dotenv.config();
 
+const app = express();
+const server = http.createServer(app); // Create HTTP server with Express app
+
+// Middleware
 app.use(express.json());
 app.use(
   cors({
@@ -24,8 +26,7 @@ app.use(
   })
 );
 
-app.listen(3001);
-
+// Socket.io setup
 const io = new Server(server, {
   cors: {
     origin: "http://localhost:3000",
@@ -38,6 +39,7 @@ const io = new Server(server, {
 // Initialize Socket.io connection handler
 handleSocketConnection(io);
 
+// Test database route
 app.get("/test-db", async (req, res) => {
   try {
     const result = await pool.query("SELECT NOW()");
@@ -47,16 +49,17 @@ app.get("/test-db", async (req, res) => {
   }
 });
 
+// Routes
 app.use("/users", userRoutes);
 app.use("/routes", requestRoutes);
 app.use("/chat", chatRoutes);
 app.use("/requests", requestRoutes);
-app.use("/email", emailRoutes); // Add email routes under /api prefix
+app.use("/email", emailRoutes);
 
-// Start the Socket.io server
-server.listen(3002, () => {
-  console.log(
-    "🚀 SMOOFriends server running on port 3001 (Express) and 3002 (Socket.io)"
-  );
+// Start the server (both Express and Socket.io on the same port)
+const PORT = 3001;
+server.listen(PORT, () => {
+  console.log(`🚀 SMOOFriends server running on port ${PORT}`);
   console.log("📡 Socket.io server ready for real-time chat");
+  console.log(`🌐 Frontend should connect to: http://localhost:${PORT}`);
 });
