@@ -19,7 +19,7 @@ export async function checkRequestHandler (req, res) {
     try {
         const {email, requestId} = req.body;
         const result = await checkRequest(email, requestId);
-        console.log(result);
+        return res.json(result);
     } catch (error) {
         console.error(error);
         throw error;

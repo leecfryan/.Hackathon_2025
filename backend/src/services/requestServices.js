@@ -26,7 +26,7 @@ export async function submitRequest (email, activity, genderPref, facultyPref, y
     }
 }
 
-export async function checkRequest (email, reqId, activity, genderPref, facutlyPref, yearPref, status) {
+export async function checkRequest (email, reqId) {
     try {
         const user = await getUserFromEmail(email);
         const userData1 = user[0];
@@ -42,7 +42,8 @@ export async function checkRequest (email, reqId, activity, genderPref, facutlyP
         const genderPref = request[0].preferred_gender;
         const facultyPref = request[0].preferred_faculty;
         const yearPref = request[0].preferred_year;
-
+        
+        console.log(meetingDate, userId1, activity, meetingHour)
         //This settles meeting date and activity
         const {rows: pending} = await pool.query(
             `select * from requests where status = 'pending' and meeting_date = $1 and user_id != $2 and activity_type = $3 and meeting_hour = $4`,

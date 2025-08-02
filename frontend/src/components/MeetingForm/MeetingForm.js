@@ -137,6 +137,12 @@ const MeetingForm = ({ isOpen, onClose, onSubmit }) => {
       console.log(response.data.message);
       if (response.data.message === "success") {
         // Reset form after successful submission
+
+        const requestId = response.data.requestId;
+        const findMatch = await axios.post("http://localhost:3001/requests/check", {requestId, email})
+        
+        console.log(findMatch)
+
         setFormData({
           email: email,
           activity: "",
