@@ -104,7 +104,6 @@ const RegisterForm = ({ onSuccess }) => {
     }
 
     setIsLoading(true);
-    
 
     try {
       // Send verification email
@@ -123,6 +122,22 @@ const RegisterForm = ({ onSuccess }) => {
       setError("Registration failed. Please try again.");
     } finally {
       setIsLoading(false);
+    }
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3001/email/send-verification",
+        formData
+      );
+
+      if (response.status === 200 && response.data.success) {
+        setMessage("Verification email sent successfully!");
+        setStep(2); // Move to verification step
+      }
+    } catch (error) {
+      setMessage(error.response?.data?.message || "Failed to send email");
+    } finally {
+      setLoading(false);
     }
   };
 
