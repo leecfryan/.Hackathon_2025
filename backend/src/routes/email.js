@@ -1,6 +1,6 @@
 // Option 1: Express.js API Route - backend/routes/email.js
 import express from "express";
-import { sendVerificationEmail } from "../utils/emailService.js";
+import { sendVerificationEmail } from "../utils/sendEmail.js";
 
 const router = express.Router();
 
