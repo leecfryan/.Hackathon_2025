@@ -105,45 +105,45 @@ const RegisterForm = ({ onSuccess }) => {
 
     setIsLoading(true);
 
-    // try {
-    //   // Send verification email
-    //   const result = await mockEmailService.sendVerificationEmail(
-    //     formData.email,
-    //     formData.firstName
-    //   );
-
-    //   if (result.success) {
-    //     console.log("Registration data prepared:", formData);
-    //     setCurrentStep("verify");
-    //   } else {
-    //     setError("Failed to send verification email. Please try again.");
-    //   }
-    // } catch (error) {
-    //   setError("Registration failed. Please try again.");
-    // } finally {
-    //   setIsLoading(false);
-    // }
-
     try {
-      const response = await axios.post(
-        "http://localhost:3001/email/send-verification",
-        formData
+      // Send verification email
+      const result = await mockEmailService.sendVerificationEmail(
+        formData.email,
+        formData.firstName
       );
 
-      if (response.status === 200 && response.data.success) {
-        console.log("Verification email sent successfully!");
-        setCurrentStep("verify"); // Move to verification step
+      if (result.success) {
+        console.log("Registration data prepared:", formData);
+        setCurrentStep("verify");
       } else {
-        // Handle case where status is 200 but success is false
-        setError(response.data.message || "Failed to send email");
+        setError("Failed to send verification email. Please try again.");
       }
     } catch (error) {
-      console.error("Error:", error);
-      setError(error.response?.data?.message || "Failed to send email");
+      setError("Registration failed. Please try again.");
     } finally {
       setIsLoading(false);
     }
-  };
+
+  //   try {
+  //     const response = await axios.post(
+  //       "http://localhost:3001/email/send-verification",
+  //       formData
+  //     );
+
+  //     if (response.status === 200 && response.data.success) {
+  //       console.log("Verification email sent successfully!");
+  //       setCurrentStep("verify"); // Move to verification step
+  //     } else {
+  //       // Handle case where status is 200 but success is false
+  //       setError(response.data.message || "Failed to send email");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //     setError(error.response?.data?.message || "Failed to send email");
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
 
   const handleVerificationSuccess = () => {
     console.log("Email verified successfully for:", formData.email);
