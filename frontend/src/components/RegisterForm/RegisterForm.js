@@ -104,6 +104,7 @@ const RegisterForm = ({ onSuccess }) => {
     }
 
     setIsLoading(true);
+    
 
     try {
       // Send verification email
