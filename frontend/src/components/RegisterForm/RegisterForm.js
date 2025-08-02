@@ -104,23 +104,38 @@ const RegisterForm = ({ onSuccess }) => {
     }
 
     setIsLoading(true);
-    
+
+    // try {
+    //   // Send verification email
+    //   const result = await mockEmailService.sendVerificationEmail(
+    //     formData.email,
+    //     formData.firstName
+    //   );
+
+    //   if (result.success) {
+    //     console.log("Registration data prepared:", formData);
+    //     setCurrentStep("verify");
+    //   } else {
+    //     setError("Failed to send verification email. Please try again.");
+    //   }
+    // } catch (error) {
+    //   setError("Registration failed. Please try again.");
+    // } finally {
+    //   setIsLoading(false);
+    // }
 
     try {
-      // Send verification email
-      const result = await mockEmailService.sendVerificationEmail(
-        formData.email,
-        formData.firstName
+      const response = await axios.post(
+        "http://localhost:3001/email/send-verification",
+        formData
       );
 
-      if (result.success) {
-        console.log("Registration data prepared:", formData);
-        setCurrentStep("verify");
-      } else {
-        setError("Failed to send verification email. Please try again.");
+      if (response.status === 200) {
+        console.log("Verification email sent successfully!");
+        setCurrentStep("verify"); // Move to verification step
       }
     } catch (error) {
-      setError("Registration failed. Please try again.");
+      setError(error.response?.data?.message || "Failed to send email");
     } finally {
       setIsLoading(false);
     }
