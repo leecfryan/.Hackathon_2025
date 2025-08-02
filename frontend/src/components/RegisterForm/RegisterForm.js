@@ -105,24 +105,24 @@ const RegisterForm = ({ onSuccess }) => {
 
     setIsLoading(true);
 
-    try {
-      // Send verification email
-      const result = await mockEmailService.sendVerificationEmail(
-        formData.email,
-        formData.firstName
-      );
+    // try {
+    //   // Send verification email
+    //   const result = await mockEmailService.sendVerificationEmail(
+    //     formData.email,
+    //     formData.firstName
+    //   );
 
-      if (result.success) {
-        console.log("Registration data prepared:", formData);
-        setCurrentStep("verify");
-      } else {
-        setError("Failed to send verification email. Please try again.");
-      }
-    } catch (error) {
-      setError("Registration failed. Please try again.");
-    } finally {
-      setIsLoading(false);
-    }
+    //   if (result.success) {
+    //     console.log("Registration data prepared:", formData);
+    //     setCurrentStep("verify");
+    //   } else {
+    //     setError("Failed to send verification email. Please try again.");
+    //   }
+    // } catch (error) {
+    //   setError("Registration failed. Please try again.");
+    // } finally {
+    //   setIsLoading(false);
+    // }
 
     try {
       const response = await axios.post(
@@ -130,14 +130,14 @@ const RegisterForm = ({ onSuccess }) => {
         formData
       );
 
-      if (response.status === 200 && response.data.success) {
-        setMessage("Verification email sent successfully!");
-        setStep(2); // Move to verification step
+      if (response.status === 200) {
+        console.log("Verification email sent successfully!");
+        setCurrentStep("verify"); // Move to verification step
       }
     } catch (error) {
-      setMessage(error.response?.data?.message || "Failed to send email");
+      setError(error.response?.data?.message || "Failed to send email");
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
