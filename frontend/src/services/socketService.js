@@ -14,7 +14,7 @@ class SocketService {
 
     console.log("Connecting to socket server...");
 
-    this.socket = io("https://35.213.190.54:3002", {
+    this.socket = io("http://localhost:3002", {
       transports: ["websocket", "polling"],
       timeout: 20000,
       forceNew: true,

@@ -12,7 +12,7 @@ export const initializeSocket = (userId) => {
 
   console.log("🔌 Initializing socket connection...");
 
-  socket = io("https://35.213.190.54:3001", {
+  socket = io("http://localhost:3001", {
     transports: ["websocket", "polling"], // Try websocket first, fallback to polling
     timeout: 10000,
     reconnection: true,
